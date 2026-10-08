@@ -2,138 +2,73 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#031c31">
-<meta name="description" content="ABISMO 14 · Arte, Código y Vida Submarina">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#031827">
 <title>ABISMO 14 · Arte, Código y Vida Submarina</title>
 
 <style>
 :root{
-  --ink:#062b3a;
-  --deep:#03131f;
-  --deep2:#041f34;
-  --sea:#087e8b;
-  --aqua:#36d6cf;
-  --foam:#e8ffff;
-  --muted:#a9d4da;
-  --coral:#ff8f9c;
-  --sand:#ffdca8;
-  --violet:#9b7cff;
-  --glass:rgba(232,255,255,.09);
-  --glass2:rgba(255,255,255,.045);
-  --line:rgba(185,255,251,.20);
-  --shadow:0 25px 80px rgba(0,10,25,.45);
-  --radius:26px;
+  --deep:#020f1c;
+  --deep2:#031d31;
+  --sea:#056b82;
+  --aqua:#42e8dc;
+  --cyan:#a8fff7;
+  --foam:#efffff;
+  --coral:#ff8fa3;
+  --gold:#ffd58a;
+  --violet:#9e8cff;
+  --glass:rgba(235,255,255,.075);
+  --glass2:rgba(235,255,255,.12);
+  --line:rgba(180,255,250,.22);
+  --shadow:0 25px 80px rgba(0,0,0,.35);
 }
 
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
   margin:0;
   color:var(--foam);
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;
   background:
-    radial-gradient(circle at 15% 0%,#176d82 0%,transparent 30%),
-    radial-gradient(circle at 85% 15%,#26336e 0%,transparent 28%),
-    linear-gradient(180deg,#062f4b 0%,#031c31 42%,#020d18 100%);
+    radial-gradient(circle at 20% 0%,#126b83 0,#063550 28%,#031a2a 65%,#010b13 100%);
   overflow-x:hidden;
 }
+button,input,select{font:inherit}
 
-body.immersive{
-  --line:rgba(185,255,251,.30);
+body.immersive nav,
+body.immersive footer{opacity:.25}
+
+body.immersive .sectionHead,
+body.immersive .heroCopy{
+  filter:drop-shadow(0 0 20px rgba(66,232,220,.2));
 }
 
-button,
-input,
-select{
-  font:inherit;
-}
+.shell{min-height:100vh;position:relative}
 
-button{
-  -webkit-tap-highlight-color:transparent;
-}
-
-.shell{
-  min-height:100vh;
-  position:relative;
-  overflow:hidden;
-}
-
-/* =========================================================
-   FONDO SUBMARINO
-========================================================= */
-
-.ocean-bg{
+.bubbles{
   position:fixed;
   inset:0;
   pointer-events:none;
   z-index:0;
-  overflow:hidden;
-}
-
-.light-ray{
-  position:absolute;
-  top:-20%;
-  width:18%;
-  height:100%;
-  background:linear-gradient(
-    180deg,
-    rgba(130,255,245,.16),
-    rgba(130,255,245,0)
-  );
-  filter:blur(12px);
-  transform:rotate(12deg);
-  opacity:.35;
-  animation:rayMove 12s ease-in-out infinite alternate;
-}
-
-.ray1{left:8%}
-.ray2{left:42%;animation-delay:-5s;opacity:.2}
-.ray3{right:8%;animation-delay:-8s;opacity:.18}
-
-@keyframes rayMove{
-  from{transform:rotate(12deg) translateX(-30px)}
-  to{transform:rotate(17deg) translateX(70px)}
-}
-
-.bubbles,
-.bubbles:before,
-.bubbles:after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-}
-
-.bubbles{
+  opacity:.25;
   background-image:
-    radial-gradient(circle,rgba(255,255,255,.32) 0 2px,transparent 3px),
-    radial-gradient(circle,rgba(117,255,249,.24) 0 1px,transparent 2px);
-  background-size:90px 160px,130px 210px;
-  animation:bubble 22s linear infinite;
-  opacity:.18;
+    radial-gradient(circle,rgba(255,255,255,.45) 0 2px,transparent 3px),
+    radial-gradient(circle,rgba(66,232,220,.5) 0 1px,transparent 2px);
+  background-size:100px 180px,150px 230px;
+  animation:bubbles 24s linear infinite;
+}
+@keyframes bubbles{
+  to{background-position:0 -180px,40px -230px}
 }
 
-.bubbles:before{
-  background-image:radial-gradient(circle,rgba(255,255,255,.22) 0 2px,transparent 3px);
-  background-size:180px 280px;
-  animation:bubble 35s linear infinite reverse;
+.noise{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
 }
-
-@keyframes bubble{
-  from{transform:translateY(80px)}
-  to{transform:translateY(-180px)}
-}
-
-/* =========================================================
-   NAVEGACIÓN
-========================================================= */
 
 nav{
   position:sticky;
@@ -141,554 +76,430 @@ nav{
   z-index:50;
   display:flex;
   align-items:center;
-  gap:8px;
-  padding:12px 5vw;
-  background:rgba(2,19,31,.72);
+  gap:7px;
+  padding:11px 4vw;
+  background:rgba(2,20,33,.78);
   backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid var(--line);
-  box-shadow:0 10px 35px rgba(0,0,0,.12);
 }
 
 .brand{
   margin-right:auto;
   font-weight:950;
-  letter-spacing:.12em;
-  color:#cffffb;
-  display:flex;
-  align-items:center;
-  gap:5px;
-  white-space:nowrap;
+  letter-spacing:.13em;
+  color:#dffffc;
+  cursor:pointer;
 }
+.brand span{color:var(--coral)}
 
-.brand span{
-  color:var(--coral);
-}
-
-.navbtn,
-.btn{
+.navbtn,.btn{
   border:1px solid var(--line);
-  background:rgba(255,255,255,.055);
+  background:rgba(255,255,255,.065);
   color:var(--foam);
   padding:10px 14px;
   border-radius:999px;
   cursor:pointer;
-  transition:
-    transform .2s ease,
-    background .2s ease,
-    border-color .2s ease,
-    box-shadow .2s ease;
+  transition:.2s;
 }
-
-.navbtn:hover,
-.btn:hover{
+.navbtn:hover,.btn:hover{
   transform:translateY(-2px);
-  background:rgba(54,214,207,.15);
-  border-color:rgba(102,239,230,.55);
+  background:rgba(66,232,220,.15);
 }
-
-.navbtn.active{
-  background:linear-gradient(
-    135deg,
-    rgba(54,214,207,.25),
-    rgba(155,124,255,.20)
-  );
-  border-color:rgba(98,238,229,.65);
-  box-shadow:0 0 22px rgba(54,214,207,.12);
-}
-
 .btn.primary{
-  background:linear-gradient(135deg,#13a8ad,#7258c8);
+  background:linear-gradient(135deg,#0daeb1,#735bd2);
   border:0;
   font-weight:850;
-  box-shadow:0 12px 30px rgba(20,170,180,.18);
 }
-
-.btn.primary:hover{
-  box-shadow:0 15px 35px rgba(20,170,180,.28);
-}
-
-.immersionBtn{
-  padding:9px 11px;
-  font-size:1rem;
-}
-
-/* =========================================================
-   PROGRESO
-========================================================= */
-
-.progressTrack{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:3px;
-  z-index:100;
-  background:transparent;
-}
-
-.progressTrack i{
-  display:block;
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,var(--aqua),var(--violet),var(--coral));
-  box-shadow:0 0 15px var(--aqua);
-  transition:width .15s linear;
-}
-
-/* =========================================================
-   GENERAL
-========================================================= */
-
-main{
-  position:relative;
-  z-index:1;
-}
-
-section{
-  padding:105px 7vw;
-  position:relative;
-}
-
-.sectionHead{
-  max-width:850px;
-  margin-bottom:40px;
-}
-
-.kicker{
-  color:var(--aqua);
-  font-weight:900;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  font-size:.76rem;
-}
-
-.sectionHead h2{
-  font-family:Georgia,serif;
-  font-size:clamp(2.3rem,5vw,4.2rem);
-  line-height:.98;
-  margin:9px 0 18px;
-}
-
-.sectionHead p{
-  color:#b8dce1;
-  line-height:1.75;
-}
-
-hr{
+.btn.gold{
+  background:linear-gradient(135deg,#d79b4b,#ff6f91);
   border:0;
-  border-top:1px solid var(--line);
+  font-weight:850;
 }
+.btn.small{padding:7px 10px;font-size:.82rem}
 
-/* =========================================================
-   HERO
-========================================================= */
+main{position:relative;z-index:2}
 
 .hero{
   min-height:91vh;
   display:grid;
   place-items:center;
-  padding-top:80px;
+  padding:70px 6vw;
+  position:relative;
   overflow:hidden;
 }
-
 .hero:before{
   content:"";
   position:absolute;
   width:800px;
-  height:500px;
+  height:800px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(66,232,220,.2),transparent 68%);
   left:-250px;
-  bottom:-250px;
-  background:radial-gradient(circle,#087e8b 0%,transparent 70%);
-  opacity:.35;
-  filter:blur(30px);
+  top:-350px;
 }
-
 .heroGrid{
-  max-width:1250px;
+  max-width:1300px;
   width:100%;
   display:grid;
-  grid-template-columns:1.08fr .92fr;
-  gap:55px;
+  grid-template-columns:1.05fr .95fr;
+  gap:45px;
   align-items:center;
 }
-
-.heroCopy{
-  animation:heroIn .9s ease both;
+.kicker{
+  color:var(--aqua);
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-size:.75rem;
 }
-
-@keyframes heroIn{
-  from{
-    opacity:0;
-    transform:translateY(25px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
 h1{
   font-family:Georgia,serif;
-  font-size:clamp(3.5rem,8vw,7.8rem);
+  font-size:clamp(3.3rem,8vw,8rem);
   line-height:.82;
   margin:18px 0;
-  letter-spacing:-.055em;
-  color:#efffff;
 }
-
 h1 em{
+  color:#9efff6;
   font-weight:400;
-  color:#9ff9f0;
 }
-
 .lead{
-  font-size:1.12rem;
+  color:#c4e8eb;
   line-height:1.75;
-  max-width:680px;
-  color:#c4e7eb;
+  max-width:720px;
+  font-size:1.08rem;
 }
-
 .heroActions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-top:28px;
-}
-
-.heroStats{
   display:flex;
   flex-wrap:wrap;
   gap:10px;
-  margin-top:30px;
+  margin-top:25px;
 }
-
-.miniStat{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.045);
-  border-radius:17px;
-  padding:10px 13px;
-  min-width:120px;
-}
-
-.miniStat strong{
-  display:block;
-  color:#dffffb;
-}
-
-.miniStat small{
-  color:#86b6be;
-}
-
-/* =========================================================
-   HERO OCEAN
-========================================================= */
-
-.oceanCard{
-  height:520px;
-  border:1px solid var(--line);
-  border-radius:42% 58% 55% 45%/38% 40% 60% 62%;
-  background:
-    radial-gradient(circle at 55% 35%,rgba(65,235,222,.17),transparent 25%),
-    linear-gradient(145deg,rgba(54,214,207,.16),rgba(5,29,48,.82));
-  box-shadow:var(--shadow);
+.ocean{
   position:relative;
-  overflow:hidden;
-  animation:oceanFloat 7s ease-in-out infinite;
-}
-
-@keyframes oceanFloat{
-  50%{
-    transform:translateY(-8px) rotate(.4deg);
-  }
-}
-
-.oceanCard canvas{
-  width:100%;
-  height:100%;
-}
-
-.oceanLabel{
-  position:absolute;
-  top:25px;
-  left:25px;
-  padding:8px 12px;
-  border-radius:999px;
-  background:rgba(0,20,35,.5);
+  min-height:510px;
   border:1px solid var(--line);
-  backdrop-filter:blur(8px);
-  font-size:.75rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:#aefaf3;
+  border-radius:48% 52% 45% 55%/38% 40% 60% 62%;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 70% 25%,rgba(100,240,230,.25),transparent 12%),
+    linear-gradient(145deg,rgba(27,153,165,.28),rgba(2,19,33,.92));
+  box-shadow:var(--shadow);
 }
-
-.pearl{
+.ocean canvas{width:100%;height:100%;display:block}
+.depthLabel{
   position:absolute;
-  width:14px;
-  height:14px;
-  border-radius:50%;
-  background:#fff;
-  box-shadow:
-    0 0 12px #bafff9,
-    0 0 30px #6df5e8;
-  animation:float 5s ease-in-out infinite;
+  left:25px;
+  bottom:24px;
+  font-size:.78rem;
+  letter-spacing:.18em;
+  color:#9ee9e7;
+}
+.creature{
+  position:absolute;
+  font-size:2.4rem;
+  animation:swim 7s ease-in-out infinite;
+  filter:drop-shadow(0 0 12px rgba(150,255,245,.35));
+}
+.c1{top:18%;left:16%}
+.c2{top:43%;right:16%;animation-delay:1.4s}
+.c3{bottom:23%;left:26%;animation-delay:2.8s}
+@keyframes swim{
+  0%,100%{transform:translate(0,0) rotate(-2deg)}
+  50%{transform:translate(28px,-18px) rotate(3deg)}
 }
 
-.p1{left:20%;top:20%}
-.p2{right:20%;top:42%;animation-delay:1s}
-.p3{left:35%;bottom:20%;animation-delay:2s}
-
-@keyframes float{
-  50%{
-    transform:translateY(-22px) scale(1.15);
-    opacity:.55;
-  }
+section{padding:90px 6vw}
+.sectionHead{
+  max-width:900px;
+  margin:0 auto 35px;
+  text-align:left;
+}
+.sectionHead h2{
+  font-family:Georgia,serif;
+  font-size:clamp(2.2rem,5vw,4.3rem);
+  line-height:.95;
+  margin:10px 0;
+}
+.sectionHead p{
+  color:#b9dce1;
+  line-height:1.7;
 }
 
-/* =========================================================
-   CARDS
-========================================================= */
-
-.cards{
+.panel{
+  background:var(--glass);
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:24px;
+  box-shadow:0 18px 60px rgba(0,0,0,.14);
+}
+.grid{
+  max-width:1250px;
+  margin:auto;
   display:grid;
-  grid-template-columns:repeat(3,1fr);
   gap:18px;
 }
-
-.card{
-  background:linear-gradient(
-    145deg,
-    rgba(232,255,255,.09),
-    rgba(255,255,255,.035)
-  );
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:25px;
-  box-shadow:0 15px 40px rgba(0,0,0,.14);
-  transition:
-    transform .25s ease,
-    border-color .25s ease,
-    background .25s ease;
-}
-
-.card:hover{
-  transform:translateY(-5px);
-  border-color:rgba(99,239,231,.42);
-  background:linear-gradient(
-    145deg,
-    rgba(54,214,207,.11),
-    rgba(255,255,255,.045)
-  );
-}
-
-.card h3{
-  margin-top:0;
-  color:#a7fff8;
-}
+.grid3{grid-template-columns:repeat(3,1fr)}
+.grid4{grid-template-columns:repeat(4,1fr)}
 
 .tag{
   display:inline-block;
   padding:5px 9px;
   border-radius:20px;
-  background:rgba(255,143,156,.15);
-  color:#ffc0c8;
-  font-size:.75rem;
-  font-weight:800;
+  background:rgba(255,143,163,.14);
+  color:#ffc2ca;
+  font-size:.72rem;
+  font-weight:900;
+}
+.card h3{margin:10px 0 8px;color:#adfff9}
+.card p{color:#c0e2e6;line-height:1.6}
+
+.species{
+  cursor:pointer;
+  transition:.25s;
+  position:relative;
+  overflow:hidden;
+}
+.species:hover{
+  transform:translateY(-7px);
+  border-color:rgba(66,232,220,.55);
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+.speciesIcon{
+  height:135px;
+  border-radius:20px;
+  display:grid;
+  place-items:center;
+  font-size:5rem;
+  background:
+    radial-gradient(circle at 50% 30%,rgba(150,255,250,.18),transparent 35%),
+    linear-gradient(145deg,#07536b,#061c32);
+}
+.species small{color:#7fcbd0}
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  place-items:center;
+  padding:20px;
+  background:rgba(0,5,12,.76);
+  backdrop-filter:blur(14px);
+}
+.modal.show{display:grid}
+.modalBox{
+  max-width:720px;
+  width:100%;
+  max-height:88vh;
+  overflow:auto;
+  background:linear-gradient(145deg,#07374c,#031522);
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:30px;
+  box-shadow:0 30px 100px #000;
+}
+.close{
+  float:right;
+  border:1px solid var(--line);
+  background:#ffffff0c;
+  color:white;
+  border-radius:50%;
+  width:38px;height:38px;
+  cursor:pointer;
+}
+.modalHero{text-align:center;font-size:5rem;margin:10px}
+
+.targets{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  max-width:1200px;
+  margin:auto;
+}
+.target{
+  padding:20px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:rgba(255,255,255,.05);
+  cursor:pointer;
+  transition:.2s;
+}
+.target:hover{
+  background:rgba(66,232,220,.09);
+  transform:translateY(-3px);
+}
+.target b{
+  color:var(--aqua);
+  font-size:1.25rem;
+}
+.target p{
+  margin:7px 0 0;
+  color:#bddde0;
+  line-height:1.5;
 }
 
-.info{
-  font-size:.86rem;
-  line-height:1.6;
-  color:#b7d9de;
+.health{
+  max-width:1250px;
+  margin:25px auto 0;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:18px;
+}
+.bigScore{
+  font-family:Georgia,serif;
+  font-size:5rem;
+  color:#9efff6;
+}
+.meter{
+  height:12px;
+  border-radius:20px;
+  background:#06283b;
+  overflow:hidden;
+  margin:8px 0 17px;
+}
+.meter i{
+  display:block;
+  height:100%;
+  width:70%;
+  border-radius:20px;
+  background:linear-gradient(90deg,#41e5d8,#ffd46f,#ff7f9d);
+  transition:.4s;
+}
+.metric{
+  display:flex;
+  justify-content:space-between;
+  margin:7px 0;
+  color:#c9e6e9;
 }
 
-/* =========================================================
-   APRENDER
-========================================================= */
+.experiment{
+  min-height:310px;
+}
+.experiment h3{
+  color:#aafff8;
+  font-family:Georgia,serif;
+  font-size:1.8rem;
+}
+.simulator{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  align-items:center;
+}
+.simOcean{
+  min-height:230px;
+  border-radius:25px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(#097c90,#06314d);
+  transition:.5s;
+}
+.simOcean .coral{
+  position:absolute;
+  bottom:15px;
+  font-size:4rem;
+}
+.simOcean .fish{
+  position:absolute;
+  font-size:2rem;
+  animation:fish 5s linear infinite;
+}
+@keyframes fish{
+  from{left:-10%}
+  to{left:105%}
+}
 
 .learnGrid{
+  max-width:1200px;
+  margin:auto;
   display:grid;
-  grid-template-columns:280px 1fr;
-  gap:20px;
+  grid-template-columns:260px 1fr;
+  gap:18px;
 }
-
 .tabs{
   display:flex;
   flex-direction:column;
   gap:8px;
 }
-
 .tab{
-  padding:14px 16px;
   text-align:left;
-  border-radius:16px;
+  padding:13px;
+  border-radius:15px;
   border:1px solid var(--line);
-  background:rgba(255,255,255,.04);
-  color:var(--foam);
+  background:#ffffff08;
+  color:white;
   cursor:pointer;
-  transition:.2s;
 }
-
-.tab:hover{
-  transform:translateX(3px);
-  background:rgba(54,214,207,.10);
-}
-
 .tab.active{
-  background:linear-gradient(
-    90deg,
-    rgba(54,214,207,.25),
-    rgba(114,88,200,.2)
-  );
+  background:linear-gradient(90deg,#20bfb827,#7258c833);
   border-color:#62eee5;
 }
 
-.lesson{
-  min-height:390px;
-  animation:lessonIn .35s ease;
-}
-
-@keyframes lessonIn{
-  from{
-    opacity:0;
-    transform:translateY(8px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
-.lesson h3{
-  font-family:Georgia,serif;
-  font-size:2rem;
-}
-
-.lesson li{
-  margin:11px 0;
-  color:#c9e7e9;
-  line-height:1.5;
-}
-
-/* =========================================================
-   STUDIO
-========================================================= */
-
 .studio{
+  max-width:1250px;
+  margin:auto;
   display:grid;
-  grid-template-columns:1fr 310px;
+  grid-template-columns:1fr 320px;
   gap:18px;
 }
-
 .canvasWrap{
-  background:#021b2b;
+  background:#021724;
   border:1px solid var(--line);
-  border-radius:26px;
+  border-radius:27px;
   padding:12px;
-  min-height:520px;
-  box-shadow:var(--shadow);
 }
-
 .drawCanvas{
   width:100%;
-  height:520px;
+  height:500px;
   display:block;
-  background:#082f45;
-  border-radius:18px;
+  background:#07354a;
+  border-radius:20px;
   touch-action:none;
 }
-
 .controls{
   display:flex;
+  gap:7px;
   flex-wrap:wrap;
-  gap:8px;
   margin-bottom:10px;
 }
-
-.controls input[type=color]{
-  width:42px;
-  height:38px;
-  padding:2px;
-  border-radius:10px;
-  border:1px solid var(--line);
-  background:transparent;
-}
-
-.controls input[type=range]{
-  accent-color:#47e2d9;
-}
-
+.controls input[type=range]{accent-color:#45e5d9}
+.controls input[type=color]{width:44px;height:38px}
 .palette{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
-  margin:12px 0;
+  margin:10px 0;
 }
-
 .sw{
   width:28px;
   height:28px;
   border-radius:50%;
-  border:1px solid #fff4;
+  border:1px solid #fff5;
   cursor:pointer;
-  transition:.2s;
 }
-
-.sw:hover{
-  transform:scale(1.18);
-}
-
-.metric{
-  display:flex;
-  justify-content:space-between;
-  margin:10px 0;
-}
-
-.meter{
-  height:10px;
-  border-radius:20px;
-  background:#06283b;
-  overflow:hidden;
-}
-
-.meter i{
-  display:block;
-  height:100%;
-  width:30%;
-  background:linear-gradient(90deg,#50e5d8,#ff8f9c);
-  transition:.3s;
-}
-
-/* =========================================================
-   GAME
-========================================================= */
 
 .gameShell{
+  max-width:1250px;
+  margin:auto;
   display:grid;
   grid-template-columns:1fr 300px;
   gap:18px;
 }
-
 .gameBox{
   position:relative;
-  background:#001827;
+  background:#00131f;
   border:1px solid var(--line);
   border-radius:28px;
   padding:10px;
   overflow:hidden;
-  box-shadow:var(--shadow);
 }
-
 .gameCanvas{
   width:100%;
-  height:600px;
+  height:590px;
   display:block;
   border-radius:20px;
   touch-action:none;
-  cursor:crosshair;
 }
-
 .hud{
   position:absolute;
   top:22px;
@@ -699,2561 +510,1867 @@ h1 em{
   flex-wrap:wrap;
   pointer-events:none;
 }
-
 .pill{
-  background:rgba(0,20,35,.7);
-  backdrop-filter:blur(10px);
-  padding:9px 12px;
+  padding:8px 11px;
+  background:#001b2ccc;
   border:1px solid var(--line);
   border-radius:999px;
-  font-size:.85rem;
+  font-size:.82rem;
+  backdrop-filter:blur(10px);
 }
-
 .gameSide{
   display:flex;
   flex-direction:column;
   gap:14px;
 }
-
-.stat{
-  background:var(--glass);
-  border:1px solid var(--line);
-  padding:17px;
-  border-radius:20px;
-}
-
 .avatar{
-  height:130px;
-  border-radius:20px;
-  background:
-    radial-gradient(circle at 50% 25%,rgba(255,255,255,.22),transparent 30%),
-    linear-gradient(145deg,#3b4fa5,#18a7a1);
+  height:140px;
+  border-radius:22px;
   display:grid;
   place-items:center;
-  font-size:4rem;
-  margin-bottom:12px;
+  font-size:4.7rem;
+  background:linear-gradient(145deg,#3452a3,#12a99f);
 }
-
 select{
   width:100%;
   padding:11px;
-  background:#062a3e;
+  margin:7px 0 12px;
   color:white;
+  background:#062b3e;
   border:1px solid var(--line);
   border-radius:12px;
-  margin:7px 0 12px;
 }
 
-.mission{
-  border-left:3px solid var(--aqua);
-  padding-left:12px;
-}
-
-.mission.complete{
-  border-color:#7dffb2;
-}
-
-.mission small{
-  color:#8dbcc2;
-}
-
-/* =========================================================
-   LOGROS
-========================================================= */
-
-.achievementGrid{
+.achievements{
+  max-width:1100px;
+  margin:auto;
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
 }
-
 .achievement{
+  min-height:155px;
+  padding:20px;
+  border-radius:22px;
   border:1px solid var(--line);
-  border-radius:20px;
-  padding:18px;
-  background:rgba(255,255,255,.04);
-  opacity:.48;
-  filter:grayscale(1);
+  background:#ffffff06;
   transition:.3s;
 }
-
 .achievement.unlocked{
-  opacity:1;
-  filter:none;
-  background:linear-gradient(
-    145deg,
-    rgba(54,214,207,.12),
-    rgba(155,124,255,.08)
-  );
-  border-color:rgba(98,238,229,.45);
-  box-shadow:0 10px 30px rgba(54,214,207,.08);
+  background:linear-gradient(145deg,#26d9c622,#8d69ed22);
+  border-color:#61eee4;
+  box-shadow:0 0 35px rgba(66,232,220,.12);
 }
+.lock{font-size:2rem;opacity:.4}
+.unlocked .lock{opacity:1}
 
-.achievementIcon{
-  font-size:2rem;
+.gallery{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
 }
-
-.achievement strong{
-  display:block;
-  margin-top:8px;
+.artItem{
+  border:1px solid var(--line);
+  border-radius:20px;
+  overflow:hidden;
+  background:#ffffff08;
 }
-
-.achievement small{
-  color:#91bdc4;
+.artPreview{
+  height:190px;
+  background:#07354a;
+  display:grid;
+  place-items:center;
+  font-size:4rem;
 }
+.artInfo{padding:15px}
 
-/* =========================================================
-   TOAST
-========================================================= */
+.manifesto{
+  max-width:1000px;
+  margin:auto;
+  text-align:center;
+  padding:60px 25px;
+  border:1px solid var(--line);
+  border-radius:40px;
+  background:
+    radial-gradient(circle at 50% 0%,#3be8da20,transparent 50%),
+    #ffffff05;
+}
+.manifesto h2{
+  font-family:Georgia,serif;
+  font-size:clamp(2.4rem,6vw,5rem);
+  margin:10px 0 20px;
+}
+.manifesto p{
+  color:#c6e4e8;
+  line-height:1.8;
+  font-size:1.08rem;
+}
 
 #toast{
   position:fixed;
-  bottom:24px;
+  bottom:25px;
   left:50%;
-  transform:translate(-50%,20px);
+  transform:translate(-50%,25px);
   opacity:0;
-  z-index:100;
-  background:#eaffff;
-  color:#063044;
+  z-index:200;
   padding:12px 18px;
   border-radius:999px;
-  font-weight:800;
+  background:#eaffff;
+  color:#063044;
+  font-weight:850;
   transition:.25s;
-  box-shadow:0 12px 35px rgba(0,0,0,.3);
-  pointer-events:none;
 }
-
 #toast.show{
   opacity:1;
   transform:translate(-50%,0);
 }
 
-/* =========================================================
-   FOOTER
-========================================================= */
-
 footer{
-  padding:65px 7vw;
-  border-top:1px solid var(--line);
-  color:#8ebac1;
-  text-align:center;
   position:relative;
-  z-index:1;
+  z-index:2;
+  padding:55px 7vw;
+  text-align:center;
+  color:#8ebac1;
+  border-top:1px solid var(--line);
 }
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:1100px){
-  .heroGrid{
-    grid-template-columns:1fr;
-  }
-
-  .oceanCard{
-    max-width:700px;
-    width:100%;
-    margin:auto;
-  }
-
-  .achievementGrid{
-    grid-template-columns:repeat(2,1fr);
-  }
+.source{
+  color:#8bcbd0;
+  font-size:.82rem;
+  line-height:1.6;
 }
 
-@media(max-width:900px){
-  section{
-    padding:75px 5vw;
-  }
-
-  .studio,
-  .gameShell,
-  .learnGrid{
-    grid-template-columns:1fr;
-  }
-
-  .cards{
-    grid-template-columns:1fr;
-  }
-
-  .tabs{
-    flex-direction:row;
-    overflow:auto;
-    padding-bottom:5px;
-  }
-
-  .tab{
-    white-space:nowrap;
-  }
-
-  .oceanCard{
-    height:370px;
-  }
+@media(max-width:1000px){
+  .heroGrid,.health,.studio,.gameShell,.learnGrid{grid-template-columns:1fr}
+  .grid4{grid-template-columns:repeat(2,1fr)}
+  .grid3{grid-template-columns:repeat(2,1fr)}
+  .achievements,.gallery{grid-template-columns:repeat(2,1fr)}
+  nav{overflow:auto}
+  .navbtn{white-space:nowrap}
 }
 
 @media(max-width:650px){
-  nav{
-    padding:10px 4vw;
-    overflow-x:auto;
-  }
-
-  .brand{
-    font-size:.82rem;
-  }
-
-  .navbtn{
-    padding:8px 11px;
-    font-size:.82rem;
-  }
-
-  .immersionBtn{
-    display:none;
-  }
-
-  h1{
-    font-size:clamp(3rem,17vw,5rem);
-  }
-
-  .hero{
-    min-height:auto;
-    padding-top:65px;
-  }
-
-  .oceanCard{
-    height:310px;
-  }
-
-  .drawCanvas{
-    height:390px;
-  }
-
-  .gameCanvas{
-    height:470px;
-  }
-
-  .achievementGrid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .miniStat{
-    flex:1;
-    min-width:100px;
-  }
-}
-
-@media(prefers-reduced-motion:reduce){
-  *,
-  *::before,
-  *::after{
-    animation-duration:.001ms!important;
-    animation-iteration-count:1!important;
-    scroll-behavior:auto!important;
-  }
+  section{padding:65px 5vw}
+  .hero{padding:55px 5vw}
+  .ocean{min-height:360px}
+  .grid3,.grid4,.targets,.achievements,.gallery,.simulator{grid-template-columns:1fr}
+  .drawCanvas{height:390px}
+  .gameCanvas{height:480px}
+  .bigScore{font-size:4rem}
 }
 </style>
 </head>
 
 <body>
+<div class="shell">
+<div class="bubbles"></div>
+<div class="noise"></div>
 
-<div class="progressTrack">
-  <i id="progressBar"></i>
+<nav>
+  <div class="brand" onclick="go('inicio')">ABISMO <span>14</span></div>
+  <button class="navbtn" onclick="go('vida')">Vida</button>
+  <button class="navbtn" onclick="go('ods')">ODS 14</button>
+  <button class="navbtn" onclick="go('ciencia')">Ciencia</button>
+  <button class="navbtn" onclick="go('aprender')">Aprender</button>
+  <button class="navbtn" onclick="go('crear')">Crear</button>
+  <button class="navbtn" onclick="go('juego')">Jugar</button>
+  <button class="navbtn" onclick="go('logros')">Logros</button>
+  <button class="navbtn" onclick="toggleImmersive()">◉</button>
+</nav>
+
+<main>
+
+<!-- =========================
+     INICIO
+========================= -->
+<section id="inicio" class="hero">
+<div class="heroGrid">
+<div class="heroCopy">
+<div class="kicker">ABISMO 14 · Arte · Código · Vida Submarina</div>
+
+<h1>El océano<br><em>también</em><br>es lienzo.</h1>
+
+<p class="lead">
+Una experiencia educativa y artística inspirada en el ODS 14 de la Agenda 2030.
+Explora especies, descubre cómo funciona un ecosistema, experimenta con ciencia,
+crea imágenes y transforma un océano virtual con tus decisiones.
+</p>
+
+<div class="heroActions">
+<button class="btn primary" onclick="go('vida')">🐋 Explorar la vida marina</button>
+<button class="btn" onclick="go('ods')">🌎 Conocer el ODS 14</button>
+<button class="btn gold" onclick="go('juego')">🎮 Entrar al océano</button>
 </div>
 
-<div class="shell">
-
-  <div class="ocean-bg">
-    <div class="light-ray ray1"></div>
-    <div class="light-ray ray2"></div>
-    <div class="light-ray ray3"></div>
-    <div class="bubbles"></div>
-  </div>
-
-  <!-- =====================================================
-       NAVEGACIÓN
-  ====================================================== -->
-
-  <nav id="mainNav">
-
-    <div class="brand">
-      ABISMO <span>14</span>
-    </div>
-
-    <button class="navbtn active" data-section="inicio" onclick="go('inicio')">
-      Inicio
-    </button>
-
-    <button class="navbtn" data-section="aprender" onclick="go('aprender')">
-      Aprender
-    </button>
-
-    <button class="navbtn" data-section="crear" onclick="go('crear')">
-      Crear
-    </button>
-
-    <button class="navbtn" data-section="juego" onclick="go('juego')">
-      Jugar
-    </button>
-
-    <button class="navbtn" data-section="logros" onclick="go('logros')">
-      Logros
-    </button>
-
-    <button
-      class="navbtn immersionBtn"
-      onclick="toggleImmersion()"
-      title="Modo inmersivo"
-    >
-      ◉
-    </button>
-
-  </nav>
-
-  <main>
-
-    <!-- ===================================================
-         INICIO
-    ==================================================== -->
-
-    <section id="inicio" class="hero">
-
-      <div class="heroGrid">
-
-        <div class="heroCopy">
-
-          <div class="kicker">
-            ODS 14 · Vida submarina · Agenda 2030
-          </div>
-
-          <h1>
-            El océano<br>
-            <em>también</em> es lienzo.
-          </h1>
-
-          <p class="lead">
-            Una experiencia de artes plásticas y programación para explorar
-            cómo el pensamiento computacional puede convertirse en imagen,
-            narrativa y acción.
-          </p>
-
-          <div class="heroActions">
-
-            <button
-              class="btn primary"
-              onclick="go('aprender')"
-            >
-              Explorar el conocimiento
-            </button>
-
-            <button
-              class="btn"
-              onclick="go('juego')"
-            >
-              Entrar al océano ✦
-            </button>
-
-          </div>
-
-          <div class="heroStats">
-
-            <div class="miniStat">
-              <strong id="heroLessons">10</strong>
-              <small>lecciones</small>
-            </div>
-
-            <div class="miniStat">
-              <strong>∞</strong>
-              <small>obras posibles</small>
-            </div>
-
-            <div class="miniStat">
-              <strong>1</strong>
-              <small>ecosistema</small>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="oceanCard">
-
-          <div class="oceanLabel">
-            Sistema submarino · vivo
-          </div>
-
-          <canvas id="heroCanvas"></canvas>
-
-          <span class="pearl p1"></span>
-          <span class="pearl p2"></span>
-          <span class="pearl p3"></span>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- ===================================================
-         APRENDER
-    ==================================================== -->
-
-    <section id="aprender">
-
-      <div class="sectionHead">
-
-        <div class="kicker">
-          01 · Pensamiento → imagen → experiencia
-        </div>
-
-        <h2>
-          Aprender también puede ser una inmersión.
-        </h2>
-
-        <p>
-          Los conceptos de Programación para Artista I aparecen aquí
-          convertidos en pequeñas herramientas visuales. La tecnología
-          no reemplaza la mirada artística: la amplifica.
-        </p>
-
-      </div>
-
-      <div class="learnGrid">
-
-        <div class="tabs" id="tabs"></div>
-
-        <article
-          class="card lesson"
-          id="lesson"
-        ></article>
-
-      </div>
-
-    </section>
-
-    <!-- ===================================================
-         CREAR
-    ==================================================== -->
-
-    <section id="crear">
-
-      <div class="sectionHead">
-
-        <div class="kicker">
-          02 · Laboratorio plástico
-        </div>
-
-        <h2>
-          Construye una obra para el océano.
-        </h2>
-
-        <p>
-          Traza, combina color y observa cómo los filtros digitales
-          pueden transformar una imagen.
-        </p>
-
-      </div>
-
-      <div class="studio">
-
-        <div class="canvasWrap">
-
-          <div class="controls">
-
-            <input
-              id="brush"
-              type="range"
-              min="1"
-              max="45"
-              value="8"
-              title="Tamaño del pincel"
-            >
-
-            <input
-              id="color"
-              type="color"
-              value="#8ffff2"
-            >
-
-            <button
-              class="btn"
-              onclick="setEraser()"
-            >
-              Borrador
-            </button>
-
-            <button
-              class="btn"
-              onclick="undoArt()"
-            >
-              ↶ Deshacer
-            </button>
-
-            <button
-              class="btn"
-              onclick="redoArt()"
-            >
-              ↷ Rehacer
-            </button>
-
-            <button
-              class="btn"
-              onclick="clearArt()"
-            >
-              Limpiar
-            </button>
-
-            <button
-              class="btn"
-              onclick="saveArt()"
-            >
-              Guardar PNG
-            </button>
-
-            <button
-              class="btn"
-              onclick="addSeaform()"
-            >
-              Añadir forma
-            </button>
-
-          </div>
-
-          <div
-            class="palette"
-            id="palette"
-          ></div>
-
-          <canvas
-            id="art"
-            class="drawCanvas"
-          ></canvas>
-
-        </div>
-
-        <div class="card">
-
-          <span class="tag">
-            Imagen digital
-          </span>
-
-          <h3>
-            Materia + píxel
-          </h3>
-
-          <p class="info">
-            Dibuja una composición. Cambia la paleta para sugerir
-            un ecosistema sano o contaminado.
-          </p>
-
-          <div class="metric">
-            <span>Turbidez</span>
-            <b id="turbidityTxt">18%</b>
-          </div>
-
-          <div class="meter">
-            <i
-              id="turbidityMeter"
-              style="width:18%"
-            ></i>
-          </div>
-
-          <input
-            id="turbidity"
-            type="range"
-            min="0"
-            max="100"
-            value="18"
-            style="width:100%"
-          >
-
-          <p class="info">
-            Experimenta con transparencia, color y contraste.
-            La turbidez altera visualmente tu ecosistema.
-          </p>
-
-          <button
-            class="btn primary"
-            onclick="manifest()"
-          >
-            Convertir en mensaje ODS 14
-          </button>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- ===================================================
-         JUEGO
-    ==================================================== -->
-
-    <section id="juego">
-
-      <div class="sectionHead">
-
-        <div class="kicker">
-          03 · Videojuego original
-        </div>
-
-        <h2>
-          Ocean Icon: viste, navega, transforma.
-        </h2>
-
-        <p>
-          Recorre un arrecife 2D, recoge elementos que restauran
-          el ecosistema y evita residuos. La contaminación modifica
-          la paleta, la visibilidad y el ambiente.
-        </p>
-
-      </div>
-
-      <div class="gameShell">
-
-        <div class="gameBox">
-
-          <canvas
-            id="game"
-            class="gameCanvas"
-          ></canvas>
-
-          <div class="hud">
-
-            <div class="pill">
-              💎 <span id="score">0</span>
-            </div>
-
-            <div class="pill">
-              ♻️ <span id="eco">0</span>
-            </div>
-
-            <div class="pill">
-              ☣ contaminación
-              <span id="poll">20</span>%
-            </div>
-
-            <div class="pill">
-              ⏱ <span id="time">0</span>s
-            </div>
-
-          </div>
-
-        </div>
-
-        <aside class="gameSide">
-
-          <div class="stat">
-
-            <div
-              class="avatar"
-              id="avatar"
-            >
-              🧜🏽‍♀️
-            </div>
-
-            <label>Personaje</label>
-
-            <select id="char">
-              <option value="🧜🏽‍♀️">
-                Sirena coral
-              </option>
-
-              <option value="🧜🏽‍♂️">
-                Guardián azul
-              </option>
-
-              <option value="🐚">
-                Oráculo concha
-              </option>
-
-              <option value="🪼">
-                Viajera medusa
-              </option>
-            </select>
-
-            <label>
-              Paleta del traje
-            </label>
-
-            <select id="outfit">
-              <option value="aqua">
-                Laguna luminosa
-              </option>
-
-              <option value="coral">
-                Coral nocturno
-              </option>
-
-              <option value="violet">
-                Abismo violeta
-              </option>
-            </select>
-
-          </div>
-
-          <div class="stat">
-
-            <b>Controles</b>
-
-            <p class="info">
-              ← → ↑ ↓ / WASD para nadar.
-              En móvil, toca y arrastra sobre el océano.
-            </p>
-
-          </div>
-
-          <div class="stat">
-
-            <b>Misión actual</b>
-
-            <div class="mission" id="missionBox">
-              <strong id="missionText">
-                Recolecta 3 elementos ♻️
-              </strong>
-
-              <br>
-
-              <small>
-                Restaurar el ecosistema es tu objetivo.
-              </small>
-            </div>
-
-          </div>
-
-          <button
-            class="btn primary"
-            onclick="resetGame()"
-          >
-            Reiniciar expedición
-          </button>
-
-        </aside>
-
-      </div>
-
-    </section>
-
-    <!-- ===================================================
-         LOGROS
-    ==================================================== -->
-
-    <section id="logros">
-
-      <div class="sectionHead">
-
-        <div class="kicker">
-          04 · Huellas de exploración
-        </div>
-
-        <h2>
-          Cada decisión deja una marca.
-        </h2>
-
-        <p>
-          Completa actividades para desbloquear pequeñas
-          constelaciones dentro de ABISMO 14.
-        </p>
-
-      </div>
-
-      <div class="achievementGrid">
-
-        <div
-          class="achievement"
-          id="achievementLearn"
-        >
-          <div class="achievementIcon">📚</div>
-          <strong>Exploradora</strong>
-          <small>
-            Visita la sección Aprender.
-          </small>
-        </div>
-
-        <div
-          class="achievement"
-          id="achievementArt"
-        >
-          <div class="achievementIcon">🎨</div>
-          <strong>Artista abisal</strong>
-          <small>
-            Crea una obra en el laboratorio.
-          </small>
-        </div>
-
-        <div
-          class="achievement"
-          id="achievementEco"
-        >
-          <div class="achievementIcon">🪸</div>
-          <strong>Guardiana del arrecife</strong>
-          <small>
-            Recupera 3 elementos ecológicos.
-          </small>
-        </div>
-
-        <div
-          class="achievement"
-          id="achievementClean"
-        >
-          <div class="achievementIcon">🌊</div>
-          <strong>Agua clara</strong>
-          <small>
-            Lleva la contaminación por debajo de 10%.
-          </small>
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-  <footer>
-    <strong>ABISMO 14</strong>
-    · Arte, Código y Vida Submarina
-    <br><br>
-    Proyecto educativo-artístico inspirado en el ODS 14
-    de la Agenda 2030.
-    <br>
-    La obra, el código y las decisiones forman parte
-    del mismo ecosistema.
-  </footer>
-
-  <div id="toast"></div>
-
+<div style="margin-top:24px" class="source">
+Proyecto educativo-artístico inspirado en el Objetivo de Desarrollo Sostenible 14
+de Naciones Unidas.
+</div>
+</div>
+
+<div class="ocean">
+<canvas id="heroCanvas"></canvas>
+<div class="creature c1">🐠</div>
+<div class="creature c2">🪼</div>
+<div class="creature c3">🐙</div>
+<div class="depthLabel">DESCENDIENDO · 14 ZONAS DE CURIOSIDAD</div>
+</div>
+</div>
+</section>
+
+<!-- =========================
+     VIDA MARINA
+========================= -->
+<section id="vida">
+<div class="sectionHead">
+<div class="kicker">01 · Atlas de vida marina</div>
+<h2>Conoce a quienes habitan el océano.</h2>
+<p>
+La vida marina no es una colección de especies aisladas. Cada organismo forma parte
+de redes ecológicas: hábitats, alimento, reproducción, depredación y relaciones
+que mantienen el funcionamiento del océano.
+</p>
+</div>
+
+<div class="grid grid4">
+
+<div class="panel card species" onclick="showSpecies('coral')">
+<div class="speciesIcon">🪸</div>
+<span class="tag">Ecosistema</span>
+<h3>Coral</h3>
+<p>Arquitecto de arrecifes y refugio para una enorme diversidad de organismos.</p>
+<small>Haz clic para explorar →</small>
+</div>
+
+<div class="panel card species" onclick="showSpecies('turtle')">
+<div class="speciesIcon">🐢</div>
+<span class="tag">Migratoria</span>
+<h3>Tortuga marina</h3>
+<p>Animal migratorio que conecta diferentes ecosistemas durante su vida.</p>
+<small>Haz clic para explorar →</small>
+</div>
+
+<div class="panel card species" onclick="showSpecies('shark')">
+<div class="speciesIcon">🦈</div>
+<span class="tag">Depredador</span>
+<h3>Tiburón</h3>
+<p>Los grandes depredadores ayudan a mantener relaciones ecológicas complejas.</p>
+<small>Haz clic para explorar →</small>
+</div>
+
+<div class="panel card species" onclick="showSpecies('whale')">
+<div class="speciesIcon">🐋</div>
+<span class="tag">Gigante azul</span>
+<h3>Ballena</h3>
+<p>Grandes mamíferos marinos que recorren enormes distancias.</p>
+<small>Haz clic para explorar →</small>
+</div>
+
+<div class="panel card species" onclick="showSpecies('octopus')">
+<div class="speciesIcon">🐙</div>
+<span class="tag">Inteligencia</span>
+<h3>Pulpo</h3>
+<p>Un invertebrado con adaptaciones sorprendentes para sobrevivir y cazar.</p>
+<small>Haz clic para explorar →</small>
+</div>
+
+<div class="panel card species" onclick="showSpecies('jelly')">
+<div class="speciesIcon">🪼</div>
+<span class="tag">Planctónico</span>
+<h3>Medusa</h3>
+<p>Organismo que forma parte de las redes alimentarias del océano.</p>
+<small>Haz clic para explorar →</small>
+</div>
+
+<div class="panel card species" onclick="showSpecies('mangrove')">
+<div class="speciesIcon">🌿</div>
+<span class="tag">Costa</span>
+<h3>Manglar</h3>
+<p>Ecosistema costero que sirve como refugio, zona de crianza y barrera natural.</p>
+<small>Haz clic para explorar →</small>
+</div>
+
+<div class="panel card species" onclick="showSpecies('plankton')">
+<div class="speciesIcon">🦠</div>
+<span class="tag">Base ecológica</span>
+<h3>Plancton</h3>
+<p>Organismos diminutos fundamentales para muchas cadenas alimentarias marinas.</p>
+<small>Haz clic para explorar →</small>
+</div>
+
+</div>
+</section>
+
+<!-- =========================
+     ODS 14
+========================= -->
+<section id="ods">
+<div class="sectionHead">
+<div class="kicker">02 · Agenda 2030</div>
+<h2>ODS 14 · Vida submarina.</h2>
+<p>
+El Objetivo 14 busca conservar y utilizar sosteniblemente los océanos, los mares
+y los recursos marinos para el desarrollo sostenible. Sus metas abarcan contaminación,
+ecosistemas, acidificación, pesca, áreas protegidas, ciencia y cooperación.
+</p>
+</div>
+
+<div class="targets">
+
+<div class="target" onclick="showTarget('14.1','Menos contaminación','Prevenir y reducir significativamente la contaminación marina, especialmente la procedente de actividades terrestres, incluidos los residuos marinos y la contaminación por nutrientes.')">
+<b>14.1 · Contaminación</b>
+<p>Menos residuos y contaminación marina.</p>
+</div>
+
+<div class="target" onclick="showTarget('14.2','Ecosistemas','Gestionar y proteger sosteniblemente los ecosistemas marinos y costeros, fortalecer su resiliencia y apoyar su restauración.')">
+<b>14.2 · Ecosistemas</b>
+<p>Proteger y restaurar ecosistemas marinos y costeros.</p>
+</div>
+
+<div class="target" onclick="showTarget('14.3','Acidificación','Minimizar y abordar los impactos de la acidificación del océano mediante cooperación científica.')">
+<b>14.3 · Acidificación</b>
+<p>Comprender y enfrentar el cambio químico del océano.</p>
+</div>
+
+<div class="target" onclick="showTarget('14.4','Pesca sostenible','Regular la extracción, combatir la sobrepesca y las prácticas pesqueras ilegales, no declaradas, no reglamentadas o destructivas.')">
+<b>14.4 · Pesca</b>
+<p>Proteger las poblaciones de peces.</p>
+</div>
+
+<div class="target" onclick="showTarget('14.5','Áreas protegidas','Conservar áreas costeras y marinas mediante sistemas de protección y gestión basados en información científica.')">
+<b>14.5 · Protección</b>
+<p>Conservar zonas marinas y costeras.</p>
+</div>
+
+<div class="target" onclick="showTarget('14.6','Prácticas pesqueras','Abordar determinadas subvenciones pesqueras que contribuyen a la sobrecapacidad y la sobrepesca.')">
+<b>14.6 · Gobernanza pesquera</b>
+<p>Reducir incentivos que favorecen prácticas pesqueras insostenibles.</p>
+</div>
+
+<div class="target" onclick="showTarget('14.7','Economía sostenible','Aumentar los beneficios económicos de los recursos marinos utilizados de forma sostenible, especialmente en pequeños Estados insulares y países menos adelantados.')">
+<b>14.7 · Economía azul</b>
+<p>Usar los recursos marinos de manera sostenible.</p>
+</div>
+
+<div class="target" onclick="showTarget('14.a','Ciencia','Aumentar el conocimiento científico, desarrollar capacidades de investigación y transferir tecnología marina para mejorar la salud del océano.')">
+<b>14.a · Ciencia marina</b>
+<p>Más conocimiento, investigación y tecnología.</p>
+</div>
+
+<div class="target" onclick="showTarget('14.b','Pesca artesanal','Facilitar el acceso de los pequeños pescadores artesanales a los recursos marinos y los mercados.')">
+<b>14.b · Comunidades pesqueras</b>
+<p>Reconocer y apoyar la pesca artesanal.</p>
+</div>
+
+<div class="target" onclick="showTarget('14.c','Cooperación internacional','Fortalecer la conservación y el uso sostenible de los océanos mediante el derecho internacional y la cooperación.')">
+<b>14.c · Cooperación</b>
+<p>Trabajar internacionalmente para proteger el océano.</p>
+</div>
+
+</div>
+
+<div class="health">
+<div class="panel">
+<span class="tag">Índice interactivo</span>
+<h3>Salud del océano</h3>
+<div class="bigScore" id="healthScore">82%</div>
+<p class="source">Este índice es una visualización educativa propia de ABISMO 14; no es un indicador oficial de Naciones Unidas.</p>
+
+<div class="metric"><span>🌊 Calidad del agua</span><b id="mWater">84%</b></div>
+<div class="meter"><i id="barWater" style="width:84%"></i></div>
+
+<div class="metric"><span>🪸 Ecosistemas</span><b id="mEco">88%</b></div>
+<div class="meter"><i id="barEco" style="width:88%"></i></div>
+
+<div class="metric"><span>🐟 Biodiversidad</span><b id="mBio">78%</b></div>
+<div class="meter"><i id="barBio" style="width:78%"></i></div>
+
+<div class="metric"><span>♻️ Contaminación controlada</span><b id="mPoll">73%</b></div>
+<div class="meter"><i id="barPoll" style="width:73%"></i></div>
+</div>
+
+<div class="panel">
+<span class="tag">Idea central</span>
+<h3>El océano es un sistema.</h3>
+<p>
+Si una parte cambia, otras partes pueden verse afectadas. Por eso ABISMO 14
+convierte las decisiones del visitante en cambios visuales.
+</p>
+<button class="btn primary" onclick="improveOcean()">🌱 Restaurar ecosistema</button>
+<button class="btn" onclick="damageOcean()">☣ Simular presión humana</button>
+</div>
+</div>
+</section>
+
+<!-- =========================
+     CIENCIA
+========================= -->
+<section id="ciencia">
+<div class="sectionHead">
+<div class="kicker">03 · Ciencia interactiva</div>
+<h2>Experimenta con el océano.</h2>
+<p>
+Aquí la ciencia se convierte en una herramienta visual. Cambia variables y observa
+cómo una representación artística del ecosistema responde.
+</p>
+</div>
+
+<div class="grid grid3">
+
+<div class="panel experiment">
+<span class="tag">Experimento 01</span>
+<h3>Contaminación</h3>
+<p>¿Qué ocurre cuando aumenta la presión contaminante?</p>
+<input id="pollutionRange" type="range" min="0" max="100" value="20" style="width:100%;accent-color:#ff8fa3">
+<div class="metric"><span>Contaminación</span><b id="pollutionValue">20%</b></div>
+<div class="meter"><i id="pollutionBar" style="width:20%"></i></div>
+<p id="pollutionText">El ecosistema conserva buena visibilidad.</p>
+</div>
+
+<div class="panel experiment">
+<span class="tag">Experimento 02</span>
+<h3>Acidificación</h3>
+<p>Explora de forma simplificada cómo cambia el ambiente al modificar el pH.</p>
+<input id="phRange" type="range" min="7.5" max="8.3" step=".01" value="8.1" style="width:100%;accent-color:#42e8dc">
+<div class="metric"><span>pH simulado</span><b id="phValue">8.10</b></div>
+<div class="meter"><i id="phBar" style="width:75%"></i></div>
+<p id="phText">Zona de referencia educativa.</p>
+</div>
+
+<div class="panel experiment">
+<span class="tag">Experimento 03</span>
+<h3>Cadena alimentaria</h3>
+<p>Quita o recupera organismos para observar la idea de interdependencia.</p>
+<div style="font-size:2rem;text-align:center;padding:25px 0">🦠 → 🐟 → 🐠 → 🦈</div>
+<button class="btn" onclick="foodChain()">Alterar cadena</button>
+<p id="chainText">La red está relativamente equilibrada.</p>
+</div>
+
+</div>
+
+<div class="panel simulator" style="max-width:1250px;margin:18px auto 0">
+<div class="simOcean" id="simOcean">
+<div class="fish" style="top:35%">🐟</div>
+<div class="fish" style="top:60%;animation-delay:1.5s">🐠</div>
+<div class="coral">🪸 🪸</div>
+</div>
+<div>
+<span class="tag">Visualización</span>
+<h3>Un océano que responde</h3>
+<p class="source">
+Esta simulación es conceptual y educativa: no representa un modelo científico
+predictivo. Su objetivo es relacionar variables con ideas del ODS 14.
+</p>
+<button class="btn primary" onclick="restoreSim()">🪸 Restaurar</button>
+</div>
+</div>
+</section>
+
+<!-- =========================
+     APRENDER
+========================= -->
+<section id="aprender">
+<div class="sectionHead">
+<div class="kicker">04 · Pensamiento → imagen → experiencia</div>
+<h2>Aprender también puede ser una inmersión.</h2>
+<p>
+Los conceptos de programación para artista aparecen convertidos en pequeñas
+herramientas visuales dentro de ABISMO 14.
+</p>
+</div>
+
+<div class="learnGrid">
+<div class="tabs" id="tabs"></div>
+<article class="panel" id="lesson"></article>
+</div>
+</section>
+
+<!-- =========================
+     CREAR
+========================= -->
+<section id="crear">
+<div class="sectionHead">
+<div class="kicker">05 · Laboratorio plástico</div>
+<h2>Construye una obra para el océano.</h2>
+<p>
+Dibuja, genera formas y convierte tu pieza en una declaración visual relacionada
+con el cuidado del océano.
+</p>
+</div>
+
+<div class="studio">
+
+<div class="canvasWrap">
+<div class="controls">
+<input id="brush" type="range" min="1" max="45" value="8">
+<input id="color" type="color" value="#8ffff2">
+<button class="btn small" onclick="clearArt()">Limpiar</button>
+<button class="btn small" onclick="undoArt()">Deshacer</button>
+<button class="btn small" onclick="redoArt()">Rehacer</button>
+<button class="btn small" onclick="addSeaform()">🪸 Forma</button>
+<button class="btn small" onclick="saveArt()">Guardar PNG</button>
+</div>
+
+<div class="palette" id="palette"></div>
+<canvas id="art" class="drawCanvas"></canvas>
+</div>
+
+<div class="panel">
+<span class="tag">Imagen digital</span>
+<h3>Materia + píxel</h3>
+<p>
+Experimenta con color, línea, transparencia y composición.
+</p>
+
+<div class="metric"><span>Turbidez</span><b id="turbidityTxt">18%</b></div>
+<div class="meter"><i id="turbidityMeter" style="width:18%"></i></div>
+
+<input id="turbidity" type="range" min="0" max="100" value="18" style="width:100%">
+
+<p class="source">
+La turbidez aquí es un recurso visual artístico, no una medición ambiental real.
+</p>
+
+<button class="btn primary" onclick="manifest()">Convertir en mensaje ODS 14</button>
+</div>
+</div>
+</section>
+
+<!-- =========================
+     JUEGO
+========================= -->
+<section id="juego">
+<div class="sectionHead">
+<div class="kicker">06 · Ocean Icon 2.0</div>
+<h2>Viste, navega y transforma.</h2>
+<p>
+Recorre distintas zonas, recoge elementos positivos, evita residuos y observa
+cómo cambia el paisaje.
+</p>
+</div>
+
+<div class="gameShell">
+
+<div class="gameBox">
+<canvas id="game" class="gameCanvas"></canvas>
+
+<div class="hud">
+<div class="pill">💎 <span id="score">0</span></div>
+<div class="pill">♻️ <span id="eco">0</span></div>
+<div class="pill">☣ <span id="poll">20</span>%</div>
+<div class="pill">⏱ <span id="time">0</span>s</div>
+<div class="pill">📍 <span id="zone">Arrecife</span></div>
+</div>
+</div>
+
+<aside class="gameSide">
+
+<div class="panel">
+<div class="avatar" id="avatar">🧜🏽‍♀️</div>
+
+<label>Personaje</label>
+<select id="char">
+<option value="🧜🏽‍♀️">Sirena coral</option>
+<option value="🧜🏽‍♂️">Guardián azul</option>
+<option value="🐚">Oráculo concha</option>
+<option value="🪼">Viajera medusa</option>
+</select>
+
+<label>Paleta</label>
+<select id="outfit">
+<option value="aqua">Laguna luminosa</option>
+<option value="coral">Coral nocturno</option>
+<option value="violet">Abismo violeta</option>
+</select>
+</div>
+
+<div class="panel">
+<b>Controles</b>
+<p class="source">← → ↑ ↓ / WASD para nadar. En móvil, arrastra sobre el océano.</p>
+</div>
+
+<div class="panel">
+<b>Misiones</b>
+<p class="source">
+♻️ restaura · 💎 suma · ☣ contamina.<br>
+Cada zona tiene una atmósfera diferente.
+</p>
+</div>
+
+<button class="btn primary" onclick="resetGame()">Reiniciar expedición</button>
+
+</aside>
+</div>
+</section>
+
+<!-- =========================
+     LOGROS
+========================= -->
+<section id="logros">
+<div class="sectionHead">
+<div class="kicker">07 · Progreso</div>
+<h2>Conviértete en guardián del océano.</h2>
+<p>
+Tus acciones desbloquean insignias. Algunas se obtienen explorando y otras
+jugando.
+</p>
+</div>
+
+<div class="achievements" id="achievements"></div>
+</section>
+
+<!-- =========================
+     GALERÍA
+========================= -->
+<section id="galeria">
+<div class="sectionHead">
+<div class="kicker">08 · Galería</div>
+<h2>El océano también puede ser una obra.</h2>
+<p>
+Tus últimas creaciones pueden aparecer aquí mientras exploras el laboratorio.
+</p>
+</div>
+
+<div class="gallery" id="gallery"></div>
+</section>
+
+<!-- =========================
+     MANIFIESTO
+========================= -->
+<section id="manifiesto">
+<div class="manifesto">
+<div class="kicker">09 · Manifiesto ABISMO 14</div>
+
+<h2>Crear también es cuidar.</h2>
+
+<p>
+El océano no es un fondo azul. Es territorio, memoria, alimento, biodiversidad,
+ciencia, cultura y vida.
+</p>
+
+<p>
+ABISMO 14 propone mirar el océano con ojos de artista y pensar con herramientas
+de programador: observar, descomponer, experimentar, crear y tomar decisiones.
+</p>
+
+<p>
+El código construye reglas. El arte construye preguntas. La ciencia construye
+conocimiento. La conservación construye futuro.
+</p>
+
+<button class="btn primary" onclick="go('inicio')">🌊 Volver a la superficie</button>
+</div>
+</section>
+
+</main>
+
+<footer>
+<strong>ABISMO 14</strong> · Arte, Código y Vida Submarina<br><br>
+Proyecto educativo-artístico inspirado en el ODS 14 de la Agenda 2030.
+<br><br>
+<span class="source">
+Fuentes principales: Naciones Unidas · Objetivo de Desarrollo Sostenible 14.
+</span>
+</footer>
+
+<div id="toast"></div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modalBox">
+<button class="close" onclick="closeModal()">×</button>
+<div id="modalContent"></div>
+</div>
 </div>
 
 <script>
-
-/* =========================================================
+/* =====================================================
    UTILIDADES
-========================================================= */
+===================================================== */
+const $=s=>document.querySelector(s);
+const $$=s=>document.querySelectorAll(s);
 
-const $ = selector => document.querySelector(selector);
+function go(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth'});
+}
 
-const go = id => {
-  document.getElementById(id).scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
+function toast(text){
+  const x=$('#toast');
+  x.textContent=text;
+  x.classList.add('show');
+  clearTimeout(window.toastTimer);
+  window.toastTimer=setTimeout(()=>x.classList.remove('show'),2400);
+}
 
-  markVisited(id);
+function toggleImmersive(){
+  document.body.classList.toggle('immersive');
+  toast(document.body.classList.contains('immersive')
+    ? 'Modo inmersivo activado 🌌'
+    : 'Modo inmersivo desactivado');
+}
+
+function showModal(html){
+  $('#modalContent').innerHTML=html;
+  $('#modal').classList.add('show');
+}
+
+function closeModal(){
+  $('#modal').classList.remove('show');
+}
+
+$('#modal').addEventListener('click',e=>{
+  if(e.target.id==='modal') closeModal();
+});
+
+/* =====================================================
+   ATLAS DE VIDA MARINA
+===================================================== */
+const species={
+ coral:{
+  icon:'🪸',
+  name:'Coral',
+  type:'Ecosistema constructor',
+  habitat:'Arrecifes tropicales y subtropicales.',
+  role:'Los arrecifes ofrecen estructura y refugio a muchas especies.',
+  threat:'Calentamiento, contaminación, cambios químicos del océano y degradación del hábitat.',
+  ods:'Se relaciona especialmente con la meta 14.2: proteger y restaurar ecosistemas marinos y costeros.'
+ },
+ turtle:{
+  icon:'🐢',
+  name:'Tortuga marina',
+  type:'Reptil migratorio',
+  habitat:'Océanos y zonas costeras.',
+  role:'Participa en diferentes redes alimentarias y conecta ecosistemas durante sus migraciones.',
+  threat:'Pérdida de hábitat, captura incidental, residuos y otras presiones humanas.',
+  ods:'Su conservación se relaciona con la protección de ecosistemas y biodiversidad marina.'
+ },
+ shark:{
+  icon:'🦈',
+  name:'Tiburón',
+  type:'Depredador',
+  habitat:'Desde zonas costeras hasta mar abierto y aguas profundas.',
+  role:'Los depredadores pueden influir en la estructura de las comunidades marinas.',
+  threat:'Sobrepesca, captura incidental y degradación del ecosistema.',
+  ods:'Se relaciona con la meta 14.4 sobre pesca sostenible y recuperación de poblaciones.'
+ },
+ whale:{
+  icon:'🐋',
+  name:'Ballena',
+  type:'Mamífero marino',
+  habitat:'Océanos y mares de diferentes regiones.',
+  role:'Participa en redes alimentarias y realiza grandes migraciones.',
+  threat:'Colisiones, contaminación, ruido, cambio ambiental y otras presiones.',
+  ods:'Su protección requiere ecosistemas marinos saludables y cooperación internacional.'
+ },
+ octopus:{
+  icon:'🐙',
+  name:'Pulpo',
+  type:'Invertebrado',
+  habitat:'Fondos rocosos, arrecifes y diferentes ambientes marinos.',
+  role:'Predador y presa dentro de redes alimentarias.',
+  threat:'Presiones pesqueras, degradación del hábitat y cambios ambientales.',
+  ods:'Representa cómo la conservación de hábitats beneficia a múltiples especies.'
+ },
+ jelly:{
+  icon:'🪼',
+  name:'Medusa',
+  type:'Cnidario',
+  habitat:'Océanos y mares.',
+  role:'Forma parte de redes tróficas y puede servir como alimento para otros organismos.',
+  threat:'Las respuestas de sus poblaciones dependen de múltiples factores ambientales.',
+  ods:'Ayuda a comprender que los ecosistemas responden a cambios físicos y biológicos.'
+ },
+ mangrove:{
+  icon:'🌿',
+  name:'Manglar',
+  type:'Ecosistema costero',
+  habitat:'Costas tropicales y subtropicales.',
+  role:'Refugio, zona de crianza y protección costera.',
+  threat:'Cambio de uso del suelo, contaminación y pérdida de hábitat.',
+  ods:'Se relaciona directamente con 14.2: conservar y restaurar ecosistemas costeros.'
+ },
+ plankton:{
+  icon:'🦠',
+  name:'Plancton',
+  type:'Base de muchas redes alimentarias',
+  habitat:'Aguas marinas y continentales.',
+  role:'Organismos fundamentales para muchas cadenas alimentarias acuáticas.',
+  threat:'Cambios de temperatura, nutrientes, química y condiciones del agua.',
+  ods:'Ayuda a visualizar cómo pequeños cambios pueden propagarse por una red ecológica.'
+ }
 };
 
-function toast(message){
-
-  const box = $("#toast");
-
-  box.textContent = message;
-  box.classList.add("show");
-
-  clearTimeout(window.toastTimer);
-
-  window.toastTimer = setTimeout(()=>{
-    box.classList.remove("show");
-  },2400);
+function showSpecies(key){
+ const s=species[key];
+ showModal(`
+   <div class="modalHero">${s.icon}</div>
+   <span class="tag">${s.type}</span>
+   <h2>${s.name}</h2>
+   <p><b>Hábitat:</b> ${s.habitat}</p>
+   <p><b>Rol ecológico:</b> ${s.role}</p>
+   <p><b>Presiones:</b> ${s.threat}</p>
+   <hr style="border-color:var(--line)">
+   <p><b>🌎 Conexión con ODS 14:</b> ${s.ods}</p>
+ `);
 }
 
-/* =========================================================
-   PROGRESO DE PÁGINA
-========================================================= */
-
-window.addEventListener("scroll",()=>{
-
-  const scrollTop =
-    window.scrollY;
-
-  const height =
-    document.documentElement.scrollHeight -
-    window.innerHeight;
-
-  const progress =
-    height > 0
-      ? (scrollTop / height) * 100
-      : 0;
-
-  $("#progressBar").style.width =
-    progress + "%";
-
-});
-
-/* =========================================================
-   NAVEGACIÓN ACTIVA
-========================================================= */
-
-const navButtons =
-  document.querySelectorAll(".navbtn[data-section]");
-
-const sections =
-  ["inicio","aprender","crear","juego","logros"]
-  .map(id=>document.getElementById(id));
-
-const observer =
-  new IntersectionObserver(entries=>{
-
-    entries.forEach(entry=>{
-
-      if(entry.isIntersecting){
-
-        navButtons.forEach(button=>{
-
-          button.classList.toggle(
-            "active",
-            button.dataset.section === entry.target.id
-          );
-
-        });
-
-      }
-
-    });
-
-  },{
-    threshold:.35
-  });
-
-sections.forEach(section=>{
-  observer.observe(section);
-});
-
-/* =========================================================
-   MODO INMERSIVO
-========================================================= */
-
-function toggleImmersion(){
-
-  document.body.classList.toggle("immersive");
-
-  const active =
-    document.body.classList.contains("immersive");
-
-  toast(
-    active
-      ? "Modo inmersivo activado 🌌"
-      : "Modo inmersivo desactivado"
-  );
+function showTarget(code,title,text){
+ showModal(`
+  <span class="tag">ODS 14</span>
+  <h2>${code} · ${title}</h2>
+  <p>${text}</p>
+  <hr style="border-color:var(--line)">
+  <p class="source">
+  La meta corresponde al marco oficial del Objetivo 14 de Naciones Unidas.
+  </p>
+ `);
 }
 
-/* =========================================================
-   LOGROS + LOCAL STORAGE
-========================================================= */
+/* =====================================================
+   SALUD DEL OCÉANO
+===================================================== */
+let health={
+ water:84,
+ eco:88,
+ bio:78,
+ poll:73
+};
 
-const saved =
-  JSON.parse(
-    localStorage.getItem("abismo14Progress") || "{}"
-  );
+function updateHealth(){
+ health.water=Math.max(0,Math.min(100,health.water));
+ health.eco=Math.max(0,Math.min(100,health.eco));
+ health.bio=Math.max(0,Math.min(100,health.bio));
+ health.poll=Math.max(0,Math.min(100,health.poll));
 
-function saveProgress(){
+ const avg=Math.round(
+   (health.water+health.eco+health.bio+health.poll)/4
+ );
 
-  localStorage.setItem(
-    "abismo14Progress",
-    JSON.stringify(saved)
-  );
+ $('#healthScore').textContent=avg+'%';
 
+ const data=[
+  ['Water','mWater','barWater',health.water],
+  ['Eco','mEco','barEco',health.eco],
+  ['Bio','mBio','barBio',health.bio],
+  ['Poll','mPoll','barPoll',health.poll]
+ ];
+
+ data.forEach(d=>{
+  $('#'+d[1]).textContent=Math.round(d[3])+'%';
+  $('#'+d[2]).style.width=d[3]+'%';
+ });
 }
 
-function unlock(id){
-
-  saved[id] = true;
-
-  const element =
-    document.getElementById(id);
-
-  if(element){
-    element.classList.add("unlocked");
-  }
-
-  saveProgress();
-
+function improveOcean(){
+ health.water+=5;
+ health.eco+=6;
+ health.bio+=4;
+ health.poll+=7;
+ updateHealth();
+ unlock('restaurador');
+ toast('El ecosistema recuperó parte de su equilibrio 🪸');
 }
 
-function loadAchievements(){
-
-  Object.keys(saved).forEach(key=>{
-
-    const element =
-      document.getElementById(key);
-
-    if(element){
-      element.classList.add("unlocked");
-    }
-
-  });
-
+function damageOcean(){
+ health.water-=8;
+ health.eco-=7;
+ health.bio-=6;
+ health.poll-=10;
+ updateHealth();
+ toast('Simulación: aumentaron las presiones humanas ☣');
 }
 
-function markVisited(section){
+updateHealth();
 
-  if(section === "aprender"){
+/* =====================================================
+   CIENCIA
+===================================================== */
+$('#pollutionRange').oninput=e=>{
+ const v=+e.target.value;
+ $('#pollutionValue').textContent=v+'%';
+ $('#pollutionBar').style.width=v+'%';
 
-    unlock("achievementLearn");
+ let text='El ecosistema conserva buena visibilidad.';
+ if(v>35) text='Aparecen señales de estrés ambiental.';
+ if(v>65) text='La visibilidad disminuye y el ambiente se vuelve más hostil.';
+ if(v>85) text='Nivel crítico dentro de esta simulación educativa.';
 
-  }
+ $('#pollutionText').textContent=text;
 
-  if(section === "crear"){
+ $('#simOcean').style.filter=
+   `saturate(${1-v*.006}) brightness(${1-v*.003})`;
+};
 
-    unlock("achievementArt");
+$('#phRange').oninput=e=>{
+ const v=+e.target.value;
+ $('#phValue').textContent=v.toFixed(2);
 
-  }
+ const normalized=((v-7.5)/.8)*100;
+ $('#phBar').style.width=normalized+'%';
 
+ let t='Zona de referencia educativa.';
+ if(v<7.9) t='La simulación representa una mayor acidificación.';
+ if(v>8.2) t='La simulación se desplaza hacia el extremo superior del rango.';
+
+ $('#phText').textContent=t;
+};
+
+let chainAltered=false;
+function foodChain(){
+ chainAltered=!chainAltered;
+ $('#chainText').textContent=chainAltered
+  ? 'Se retiró un nivel de la red: la representación muestra una cadena menos equilibrada.'
+  : 'La red está relativamente equilibrada.';
+ toast(chainAltered?'La red cambió 🐟':'La red recuperó su equilibrio');
 }
 
-loadAchievements();
+/* =====================================================
+   SIMULACIÓN
+===================================================== */
+function restoreSim(){
+ $('#simOcean').style.filter='none';
+ $('#pollutionRange').value=10;
+ $('#pollutionRange').dispatchEvent(new Event('input'));
+ toast('El pequeño ecosistema fue restaurado 🌱');
+}
 
-/* =========================================================
-   APRENDER
-========================================================= */
-
-const lessons = [
-
+/* =====================================================
+   LECCIONES
+===================================================== */
+const lessons=[
 [
-"1 · Pensamiento computacional",
-"Descomponer, reconocer patrones, abstraer y diseñar soluciones.",
-"La máquina procesa instrucciones; el binario representa información; programar consiste en expresar procedimientos; un algoritmo ordena pasos; un diagrama de flujo visualiza decisiones y procesos.",
-"Aquí: el juego convierte una problemática ambiental en reglas, estados y decisiones."
+'01 · Pensamiento computacional',
+'Descomponer para crear.',
+'Descomposición, patrones, abstracción y algoritmos permiten convertir problemas complejos en sistemas que podemos representar.',
+'En ABISMO 14: la problemática ambiental se convierte en reglas, estados y decisiones.'
 ],
-
 [
-"2 · Sistematización",
-"Del problema complejo al sistema.",
-"Descomposición: separar contaminación, navegación, personaje y recompensas. Patrones: repetir comportamientos de peces y partículas. Abstracción: representar un arrecife con formas. Modularidad: funciones independientes para dibujo, juego y filtros.",
-"Aquí: cada módulo de la app es una pieza reutilizable del ecosistema."
+'02 · Sistematización',
+'El océano como sistema.',
+'Contaminación, navegación, personajes, recompensas y ambiente pueden separarse en módulos.',
+'En ABISMO 14: cada módulo de la aplicación representa una parte del ecosistema.'
 ],
-
 [
-"3 · Conceptos básicos",
-"Datos, operadores y funciones.",
-"Variables guardan datos simples; arreglos y objetos organizan estructuras. Operadores comparan estados. Las funciones encapsulan acciones y permiten reutilizar código.",
-"Aquí: score, contaminación, posición y tiempo son datos que transforman la experiencia."
+'03 · Variables y datos',
+'Datos que transforman imágenes.',
+'Variables almacenan información; objetos y arreglos organizan estructuras; funciones encapsulan acciones.',
+'En ABISMO 14: puntuación, contaminación, posición y tiempo modifican la experiencia.'
 ],
-
 [
-"4 · Estructuras de control",
-"Elegir, repetir y recordar.",
-"Selección: si el personaje toca basura, aumenta contaminación. Ciclos: el bucle de animación actualiza el océano. Recursión: las reglas pueden generar estructuras de coral.",
-"Aquí: el ecosistema literalmente responde al código."
+'04 · Condicionales y ciclos',
+'Si sucede esto, cambia aquello.',
+'Las condiciones permiten que una experiencia interactiva responda a las decisiones del usuario.',
+'En ABISMO 14: recoger basura aumenta la presión; recoger elementos ecológicos restaura el ambiente.'
 ],
-
 [
-"5 · Código como lenguaje visual",
-"Convenciones y estandarización.",
-"Nombrar variables con claridad, organizar bloques y separar responsabilidades hace que una obra interactiva pueda crecer sin convertirse en una maraña.",
-"Aquí: nombres como pollution, player, drawCoral y updateGame mantienen legible el sistema."
+'05 · Código visual',
+'Programar también es componer.',
+'Color, movimiento, geometría y repetición pueden producir imágenes procedurales.',
+'En ABISMO 14: corales, partículas y fondos nacen de reglas.'
 ],
-
 [
-"6 · Narrativa multimedia",
-"Contar con decisiones, espacio y ritmo.",
-"Narrativa, arco, personajes, arquetipos, progresión y escenarios construyen sentido. La interactividad agrega decisiones, aleatoriedad y personalización.",
-"Aquí: eres una habitante del océano que cambia el mundo con sus acciones."
+'06 · Narrativa',
+'Contar con decisiones.',
+'Una historia interactiva utiliza espacio, ritmo, personajes y decisiones para construir significado.',
+'En ABISMO 14: el visitante no solo observa el océano; interviene en él.'
 ],
-
 [
-"7 · Interfaz de usuario",
-"Hacer visible el sistema.",
-"Elementos interactivos, componentes y navegación convierten conceptos abstractos en acciones: botones, medidores, pestañas, controles y feedback.",
-"Aquí: la interfaz funciona como una concha: protege la información, pero deja entrar la experiencia."
+'07 · Interfaz',
+'Hacer visible el sistema.',
+'Botones, indicadores, pestañas y feedback convierten procesos abstractos en acciones.',
+'En ABISMO 14: la interfaz funciona como una guía de inmersión.'
 ],
-
 [
-"8 · Arte visual + imagen digital",
-"Forma, composición, color y píxel.",
-"La composición dirige la mirada; forma y geometría construyen significado. Una imagen digital se organiza en píxeles, canales y espacios de color.",
-"Aquí: la turbidez altera el filtro visual del mundo y del laboratorio."
+'08 · Imagen digital',
+'Píxel, color y composición.',
+'Una imagen digital puede entenderse como datos organizados en una superficie visual.',
+'En ABISMO 14: el laboratorio convierte conceptos ambientales en una obra.'
 ],
-
 [
-"9 · Geometría + procedural",
-"Reglas que producen formas.",
-"Líneas, planos y primitivas se parametrizan mediante coordenadas. Los sistemas procedurales permiten crear estructuras a partir de reglas.",
-"Aquí: corales y fondos se generan con código, no solamente con una imagen fija."
+'09 · Geometría procedural',
+'Reglas que producen formas.',
+'Coordenadas, primitivas y repetición permiten generar estructuras como corales y paisajes.',
+'En ABISMO 14: el arrecife no depende de una sola imagen fija.'
 ],
-
 [
-"10 · Animación",
-"El tiempo como material.",
-"Una animación puede entenderse como una secuencia de imágenes o como figuras cuyo movimiento depende del tiempo.",
-"Aquí: peces, algas, burbujas y medusas nacen del mismo reloj temporal."
+'10 · Animación',
+'El tiempo como material.',
+'La animación modifica posiciones y estados continuamente mediante un reloj temporal.',
+'En ABISMO 14: peces, burbujas, criaturas y partículas se mueven con el tiempo.'
 ]
-
 ];
 
-const tabs = $("#tabs");
-const lesson = $("#lesson");
-
 lessons.forEach((l,i)=>{
-
-  const button =
-    document.createElement("button");
-
-  button.className =
-    "tab" + (!i ? " active" : "");
-
-  button.textContent = l[0];
-
-  button.onclick = ()=>{
-
-    document
-      .querySelectorAll(".tab")
-      .forEach(x=>x.classList.remove("active"));
-
-    button.classList.add("active");
-
-    renderLesson(i);
-
-  };
-
-  tabs.appendChild(button);
-
+ const b=document.createElement('button');
+ b.className='tab'+(!i?' active':'');
+ b.textContent=l[0];
+ b.onclick=()=>{
+  $$('.tab').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  renderLesson(i);
+ };
+ $('#tabs').appendChild(b);
 });
 
 function renderLesson(i){
-
-  const l = lessons[i];
-
-  lesson.innerHTML = `
-
-    <span class="tag">${l[0]}</span>
-
-    <h3>${l[1]}</h3>
-
-    <p>${l[2]}</p>
-
-    <hr>
-
-    <p>
-      <b>En ABISMO 14:</b>
-      ${l[3]}
-    </p>
-
-  `;
-
+ const l=lessons[i];
+ $('#lesson').innerHTML=`
+ <span class="tag">${l[0]}</span>
+ <h3 style="font-family:Georgia,serif;font-size:2.2rem">${l[1]}</h3>
+ <p>${l[2]}</p>
+ <hr style="border-color:var(--line)">
+ <p><b>En ABISMO 14:</b> ${l[3]}</p>
+ `;
 }
-
 renderLesson(0);
 
-$("#heroLessons").textContent =
-  lessons.length;
-
-/* =========================================================
+/* =====================================================
    LABORATORIO DE ARTE
-========================================================= */
-
-const art = $("#art");
-const ctx = art.getContext("2d");
-
-let drawing = false;
-let eraser = false;
-
-let artHistory = [];
-let artFuture = [];
+===================================================== */
+const art=$('#art');
+const ctx=art.getContext('2d');
+let drawing=false;
+let artHistory=[];
+let artFuture=[];
+let restoring=false;
 
 function resizeArt(){
+ const r=art.getBoundingClientRect();
+ const d=devicePixelRatio||1;
 
-  const r =
-    art.getBoundingClientRect();
+ const old=document.createElement('canvas');
+ if(art.width&&art.height){
+  old.width=art.width;
+  old.height=art.height;
+  old.getContext('2d').drawImage(art,0,0);
+ }
 
-  const d =
-    window.devicePixelRatio || 1;
+ art.width=r.width*d;
+ art.height=r.height*d;
 
-  art.width =
-    r.width * d;
+ ctx.setTransform(d,0,0,d,0,0);
+ ctx.fillStyle='#07354a';
+ ctx.fillRect(0,0,r.width,r.height);
+ drawBackdrop();
 
-  art.height =
-    r.height * d;
-
-  ctx.setTransform(
-    d,0,0,d,0,0
-  );
-
-  ctx.fillStyle =
-    "#082f45";
-
-  ctx.fillRect(
-    0,
-    0,
-    r.width,
-    r.height
-  );
-
-  drawArtBackdrop();
-
-  saveArtState();
-
+ if(old.width){
+  ctx.drawImage(old,0,0,old.width/d,old.height/d);
+ }
 }
 
-function drawArtBackdrop(){
+function drawBackdrop(){
+ const w=art.clientWidth;
+ const h=art.clientHeight;
 
-  const w = art.clientWidth;
-  const h = art.clientHeight;
+ ctx.save();
+ ctx.globalAlpha=.12;
 
-  ctx.save();
+ for(let i=0;i<14;i++){
+  ctx.strokeStyle=i%2?'#65eee0':'#ff8fa3';
+  ctx.beginPath();
+  ctx.arc(w*(i/14),h*.95,35+i*4,Math.PI,Math.PI*2);
+  ctx.stroke();
+ }
 
-  ctx.globalAlpha = .12;
-
-  for(let i=0;i<18;i++){
-
-    ctx.strokeStyle =
-      i % 2
-        ? "#7af4e7"
-        : "#ff9aa5";
-
-    ctx.beginPath();
-
-    ctx.arc(
-      w*(.03+i*.055),
-      h*.94,
-      35+i*5,
-      Math.PI,
-      Math.PI*2
-    );
-
-    ctx.stroke();
-
-  }
-
-  ctx.restore();
-
+ ctx.restore();
 }
 
-function pos(e){
+window.addEventListener('resize',resizeArt);
 
-  const r =
-    art.getBoundingClientRect();
-
-  return {
-    x:e.clientX-r.left,
-    y:e.clientY-r.top
-  };
-
+function artPos(e){
+ const r=art.getBoundingClientRect();
+ return {
+  x:e.clientX-r.left,
+  y:e.clientY-r.top
+ };
 }
 
-function saveArtState(){
-
-  try{
-
-    artHistory.push(
-      art.toDataURL()
-    );
-
-    if(artHistory.length > 25){
-      artHistory.shift();
-    }
-
-    artFuture = [];
-
-  }catch(e){}
-
-}
-
-function restoreImage(data,callback){
-
-  const image =
-    new Image();
-
-  image.onload = ()=>{
-
-    const d =
-      window.devicePixelRatio || 1;
-
-    ctx.setTransform(
-      d,0,0,d,0,0
-    );
-
-    ctx.clearRect(
-      0,
-      0,
-      art.clientWidth,
-      art.clientHeight
-    );
-
-    ctx.drawImage(
-      image,
-      0,
-      0,
-      art.clientWidth,
-      art.clientHeight
-    );
-
-    if(callback) callback();
-
-  };
-
-  image.src = data;
-
-}
-
-art.addEventListener(
-  "pointerdown",
-  e=>{
-
-    drawing = true;
-
-    art.setPointerCapture(
-      e.pointerId
-    );
-
-    const p = pos(e);
-
-    ctx.beginPath();
-    ctx.moveTo(p.x,p.y);
-
-  }
-);
-
-art.addEventListener(
-  "pointermove",
-  e=>{
-
-    if(!drawing) return;
-
-    const p = pos(e);
-
-    ctx.lineWidth =
-      +$("#brush").value;
-
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-
-    if(eraser){
-
-      ctx.globalCompositeOperation =
-        "destination-out";
-
-      ctx.strokeStyle =
-        "rgba(0,0,0,1)";
-
-    }else{
-
-      ctx.globalCompositeOperation =
-        "source-over";
-
-      ctx.strokeStyle =
-        $("#color").value;
-
-    }
-
-    ctx.lineTo(p.x,p.y);
-    ctx.stroke();
-
-  }
-);
-
-function finishDrawing(){
-
-  if(!drawing) return;
-
-  drawing = false;
-
-  ctx.globalCompositeOperation =
-    "source-over";
-
-  saveArtState();
-
-  unlock("achievementArt");
-
-}
-
-art.addEventListener(
-  "pointerup",
-  finishDrawing
-);
-
-art.addEventListener(
-  "pointercancel",
-  finishDrawing
-);
-
-function setEraser(){
-
-  eraser = !eraser;
-
-  toast(
-    eraser
-      ? "Borrador activado 🫧"
-      : "Pincel activado 🎨"
-  );
-
-}
-
-[
-  "#65eee0",
-  "#ff8f9c",
-  "#ffdca8",
-  "#9d8cff",
-  "#ffffff",
-  "#0b6f87",
-  "#ffbd6b",
-  "#66ff99"
-].forEach(color=>{
-
-  const sw =
-    document.createElement("span");
-
-  sw.className = "sw";
-
-  sw.style.background =
-    color;
-
-  sw.onclick = ()=>{
-
-    $("#color").value =
-      color;
-
-    eraser = false;
-
-  };
-
-  $("#palette").appendChild(sw);
-
+art.addEventListener('pointerdown',e=>{
+ drawing=true;
+ art.setPointerCapture(e.pointerId);
+ const p=artPos(e);
+ ctx.beginPath();
+ ctx.moveTo(p.x,p.y);
 });
 
-function clearArt(){
+art.addEventListener('pointermove',e=>{
+ if(!drawing)return;
 
-  ctx.globalCompositeOperation =
-    "source-over";
+ const p=artPos(e);
+ ctx.lineWidth=+$('#brush').value;
+ ctx.lineCap='round';
+ ctx.lineJoin='round';
+ ctx.strokeStyle=$('#color').value;
 
-  ctx.fillStyle =
-    "#082f45";
+ ctx.lineTo(p.x,p.y);
+ ctx.stroke();
+});
 
-  ctx.fillRect(
-    0,
-    0,
-    art.clientWidth,
-    art.clientHeight
-  );
-
-  drawArtBackdrop();
-
+function stopDrawing(){
+ if(drawing){
+  drawing=false;
   saveArtState();
-
-  toast("Lienzo preparado para una nueva obra 🌊");
-
+ }
 }
 
-function addSeaform(){
+art.addEventListener('pointerup',stopDrawing);
+art.addEventListener('pointercancel',stopDrawing);
 
-  const w =
-    art.clientWidth;
+function saveArtState(){
+ if(restoring)return;
 
-  const h =
-    art.clientHeight;
+ artHistory.push(art.toDataURL());
 
-  ctx.save();
+ if(artHistory.length>20) artHistory.shift();
 
-  ctx.globalAlpha = .65;
+ artFuture=[];
+ unlock('artista');
+ renderGallery();
+}
 
-  ctx.strokeStyle =
-    $("#color").value;
-
-  ctx.lineWidth = 4;
-
-  let x =
-    Math.random()*w;
-
-  let y =
-    h*.75;
-
-  ctx.beginPath();
-
-  ctx.moveTo(x,y);
-
-  for(let i=0;i<8;i++){
-
-    ctx.quadraticCurveTo(
-      x+(Math.random()-.5)*90,
-      y-i*28,
-      x+(Math.random()-.5)*50,
-      y-(i+1)*35
-    );
-
-  }
-
-  ctx.stroke();
-
-  ctx.restore();
-
-  saveArtState();
-
-  unlock("achievementArt");
-
-  toast("Nueva forma marina creada 🪸");
-
+function restoreState(url){
+ const img=new Image();
+ img.onload=()=>{
+  restoring=true;
+  clearArt(false);
+  ctx.drawImage(img,0,0,art.clientWidth,art.clientHeight);
+  restoring=false;
+ };
+ img.src=url;
 }
 
 function undoArt(){
+ if(artHistory.length<2){
+  toast('No hay nada que deshacer');
+  return;
+ }
 
-  if(artHistory.length <= 1){
+ const current=artHistory.pop();
+ artFuture.push(current);
 
-    toast("No hay nada que deshacer");
-
-    return;
-
-  }
-
-  const current =
-    artHistory.pop();
-
-  artFuture.push(current);
-
-  restoreImage(
-    artHistory[artHistory.length-1]
-  );
-
+ restoreState(artHistory[artHistory.length-1]);
 }
 
 function redoArt(){
+ if(!artFuture.length){
+  toast('No hay nada que rehacer');
+  return;
+ }
 
-  if(!artFuture.length){
-
-    toast("No hay nada que rehacer");
-
-    return;
-
-  }
-
-  const next =
-    artFuture.pop();
-
-  artHistory.push(next);
-
-  restoreImage(next);
-
+ const next=artFuture.pop();
+ artHistory.push(next);
+ restoreState(next);
 }
+
+function clearArt(show=true){
+ ctx.fillStyle='#07354a';
+ ctx.fillRect(0,0,art.clientWidth,art.clientHeight);
+ drawBackdrop();
+
+ if(show) saveArtState();
+}
+
+function addSeaform(){
+ const w=art.clientWidth;
+ const h=art.clientHeight;
+
+ ctx.save();
+ ctx.globalAlpha=.7;
+ ctx.strokeStyle=$('#color').value;
+ ctx.lineWidth=4;
+ ctx.lineCap='round';
+
+ const x=Math.random()*w;
+ let y=h*.82;
+
+ ctx.beginPath();
+ ctx.moveTo(x,y);
+
+ for(let i=0;i<9;i++){
+  const nx=x+(Math.random()-.5)*90;
+  const ny=y-i*30;
+  ctx.quadraticCurveTo(
+   x+(Math.random()-.5)*100,
+   y-i*15,
+   nx,
+   ny
+  );
+ }
+
+ ctx.stroke();
+ ctx.restore();
+
+ saveArtState();
+ toast('Nueva forma submarina creada 🪸');
+}
+
+['#65eee0','#ff8f9c','#ffdca8','#9d8cff','#ffffff','#0b6f87','#ffbd6b','#57a7ff']
+.forEach(c=>{
+ const s=document.createElement('span');
+ s.className='sw';
+ s.style.background=c;
+ s.title=c;
+ s.onclick=()=>$('#color').value=c;
+ $('#palette').appendChild(s);
+});
 
 function saveArt(){
-
-  const link =
-    document.createElement("a");
-
-  link.download =
-    "abismo14-obra.png";
-
-  link.href =
-    art.toDataURL("image/png");
-
-  link.click();
-
-  unlock("achievementArt");
-
-  toast("Tu obra fue guardada como PNG 🐚");
-
+ const a=document.createElement('a');
+ a.download='abismo14-obra.png';
+ a.href=art.toDataURL('image/png');
+ a.click();
+ unlock('artista');
+ toast('Tu obra fue preparada como PNG 🎨');
 }
 
-$("#turbidity").addEventListener(
-  "input",
-  e=>{
+$('#turbidity').oninput=e=>{
+ const v=+e.target.value;
 
-    const value =
-      +e.target.value;
+ $('#turbidityTxt').textContent=v+'%';
+ $('#turbidityMeter').style.width=v+'%';
 
-    $("#turbidityTxt").textContent =
-      value+"%";
-
-    $("#turbidityMeter").style.width =
-      value+"%";
-
-    art.style.filter = `
-      saturate(${1-value*.004})
-      contrast(${1-value*.002})
-      brightness(${1-value*.003})
-      hue-rotate(${value*.35}deg)
-    `;
-
-  }
-);
+ art.style.filter=
+  `saturate(${1-v*.004})
+   contrast(${1-v*.002})
+   brightness(${1-v*.003})
+   hue-rotate(${v*.35}deg)`;
+};
 
 function manifest(){
-
-  toast(
-    "Mensaje ODS 14: crear, cuidar y devolver vida al océano. 🌊"
-  );
-
-  unlock("achievementArt");
-
+ unlock('mensaje');
+ showModal(`
+  <div class="modalHero">🌊</div>
+  <span class="tag">MANIFIESTO ODS 14</span>
+  <h2>Mi obra también habla por el océano.</h2>
+  <p>
+  Crear una imagen puede convertirse en una forma de comunicar que los océanos
+  necesitan protección, conocimiento y decisiones sostenibles.
+  </p>
+  <p><b>Mi acción:</b> observar · aprender · crear · cuidar.</p>
+ `);
 }
 
-/* =========================================================
-   HERO ANIMADO
-========================================================= */
+/* =====================================================
+   GALERÍA
+===================================================== */
+function renderGallery(){
+ const gallery=$('#gallery');
 
-const hc =
-  $("#heroCanvas");
+ if(!artHistory.length){
+  gallery.innerHTML=`
+   <div class="panel" style="grid-column:1/-1;text-align:center">
+    🎨 Tu galería está esperando una obra.
+   </div>
+  `;
+  return;
+ }
 
-const hx =
-  hc.getContext("2d");
+ const last=artHistory.slice(-6).reverse();
 
-let ht = 0;
+ gallery.innerHTML=last.map((img,i)=>`
+  <div class="artItem">
+   <div class="artPreview">
+    <img src="${img}" style="width:100%;height:100%;object-fit:cover">
+   </div>
+   <div class="artInfo">
+    <b>Obra abismal ${last.length-i}</b>
+    <p class="source">Laboratorio de arte · ODS 14</p>
+   </div>
+  </div>
+ `).join('');
+}
 
-const heroFish = [
-  {x:.2,y:.28,s:1.0,c:"#66f7e9",speed:.25},
-  {x:.7,y:.43,s:.65,c:"#ff9aa5",speed:.17},
-  {x:.45,y:.65,s:.8,c:"#a78bff",speed:.21}
+resizeArt();
+clearArt(false);
+artHistory=[art.toDataURL()];
+renderGallery();
+
+/* =====================================================
+   LOGROS
+===================================================== */
+const achievementData=[
+ {
+  id:'explorador',
+  icon:'🐋',
+  title:'Explorador azul',
+  text:'Explora el Atlas de Vida Marina.'
+ },
+ {
+  id:'ods',
+  icon:'🌎',
+  title:'Embajador ODS 14',
+  text:'Consulta las metas del ODS 14.'
+ },
+ {
+  id:'cientifico',
+  icon:'🔬',
+  title:'Oceanógrafo',
+  text:'Experimenta con las herramientas científicas.'
+ },
+ {
+  id:'artista',
+  icon:'🎨',
+  title:'Artista del océano',
+  text:'Crea una obra en el laboratorio.'
+ },
+ {
+  id:'restaurador',
+  icon:'🪸',
+  title:'Restaurador',
+  text:'Restaura el ecosistema.'
+ },
+ {
+  id:'mensaje',
+  icon:'📣',
+  title:'Voz del océano',
+  text:'Convierte una obra en un mensaje ODS 14.'
+ },
+ {
+  id:'reciclador',
+  icon:'♻️',
+  title:'Cazador de residuos',
+  text:'Recoge residuos durante el juego.'
+ },
+ {
+  id:'abismo',
+  icon:'🌌',
+  title:'Habitante del abismo',
+  text:'Alcanza la zona profunda del videojuego.'
+ },
+ {
+  id:'puntaje',
+  icon:'💎',
+  title:'Coleccionista azul',
+  text:'Consigue 100 puntos en Ocean Icon.'
+ }
 ];
 
-function heroResize(){
+let unlocked=JSON.parse(localStorage.getItem('abismo14Achievements')||'[]');
 
-  const d =
-    window.devicePixelRatio || 1;
+function unlock(id){
+ if(!unlocked.includes(id)){
+  unlocked.push(id);
+  localStorage.setItem('abismo14Achievements',JSON.stringify(unlocked));
+  renderAchievements();
 
-  hc.width =
-    hc.clientWidth*d;
-
-  hc.height =
-    hc.clientHeight*d;
-
+  const a=achievementData.find(x=>x.id===id);
+  if(a) toast('🏆 Logro desbloqueado: '+a.title);
+ }
 }
 
-function drawFish(x,y,size,color){
+function renderAchievements(){
+ $('#achievements').innerHTML=achievementData.map(a=>{
+  const ok=unlocked.includes(a.id);
 
-  hx.save();
+  return `
+   <div class="achievement ${ok?'unlocked':''}">
+    <div class="lock">${ok?a.icon:'🔒'}</div>
+    <h3>${a.title}</h3>
+    <p class="source">${a.text}</p>
+   </div>
+  `;
+ }).join('');
+}
 
-  hx.translate(x,y);
+renderAchievements();
 
-  hx.fillStyle =
-    color;
+/* =====================================================
+   HERO CANVAS
+===================================================== */
+const hc=$('#heroCanvas');
+const hx=hc.getContext('2d');
+let ht=0;
 
-  hx.globalAlpha =
-    .75;
-
-  hx.beginPath();
-
-  hx.ellipse(
-    0,
-    0,
-    18*size,
-    9*size,
-    0,
-    0,
-    Math.PI*2
-  );
-
-  hx.fill();
-
-  hx.beginPath();
-
-  hx.moveTo(
-    -15*size,
-    0
-  );
-
-  hx.lineTo(
-    -29*size,
-    -11*size
-  );
-
-  hx.lineTo(
-    -29*size,
-    11*size
-  );
-
-  hx.closePath();
-
-  hx.fill();
-
-  hx.restore();
-
+function heroResize(){
+ const r=hc.getBoundingClientRect();
+ const d=devicePixelRatio||1;
+ hc.width=r.width*d;
+ hc.height=r.height*d;
 }
 
 function hero(){
+ ht+=.008;
 
-  ht += .008;
+ const d=devicePixelRatio||1;
+ const w=hc.clientWidth;
+ const h=hc.clientHeight;
 
-  const d =
-    window.devicePixelRatio || 1;
+ hx.setTransform(d,0,0,d,0,0);
+ hx.clearRect(0,0,w,h);
 
-  hx.setTransform(
-    d,0,0,d,0,0
-  );
+ const grad=hx.createLinearGradient(0,0,0,h);
+ grad.addColorStop(0,'#063f61');
+ grad.addColorStop(.5,'#042d4b');
+ grad.addColorStop(1,'#010e1c');
 
-  const w =
-    hc.clientWidth;
+ hx.fillStyle=grad;
+ hx.fillRect(0,0,w,h);
 
-  const h =
-    hc.clientHeight;
+ for(let layer=0;layer<5;layer++){
+  hx.strokeStyle=[
+   '#42e8dc',
+   '#54a8e9',
+   '#9e8cff',
+   '#ff91a0',
+   '#ffd58a'
+  ][layer];
 
-  hx.clearRect(
-    0,
-    0,
-    w,
-    h
-  );
+  hx.globalAlpha=.18;
+  hx.lineWidth=2+layer*.5;
+  hx.beginPath();
 
-  const gradient =
-    hx.createLinearGradient(
-      0,
-      0,
-      0,
-      h
-    );
+  for(let x=0;x<w;x+=10){
+   const y=
+    h*(.2+layer*.15)+
+    Math.sin(x*.018+ht*(1+layer*.2))*22+
+    Math.sin(x*.05+layer)*10;
 
-  gradient.addColorStop(
-    0,
-    "#073f5c"
-  );
-
-  gradient.addColorStop(
-    1,
-    "#031827"
-  );
-
-  hx.fillStyle =
-    gradient;
-
-  hx.fillRect(
-    0,
-    0,
-    w,
-    h
-  );
-
-  /* rayos */
-
-  for(let i=0;i<5;i++){
-
-    hx.fillStyle =
-      "rgba(105,255,241,.035)";
-
-    hx.beginPath();
-
-    hx.moveTo(
-      w*(i*.24),
-      0
-    );
-
-    hx.lineTo(
-      w*(i*.24+.10),
-      h
-    );
-
-    hx.lineTo(
-      w*(i*.24+.20),
-      h
-    );
-
-    hx.lineTo(
-      w*(i*.24+.05),
-      0
-    );
-
-    hx.fill();
-
+   hx.lineTo(x,y);
   }
 
-  /* olas */
+  hx.stroke();
+ }
 
-  for(let layer=0;layer<4;layer++){
+ hx.globalAlpha=.6;
 
-    hx.strokeStyle =
-      [
-        "#39ded0",
-        "#54a8e9",
-        "#8c6ce7",
-        "#ff91a0"
-      ][layer];
+ for(let i=0;i<20;i++){
+  const x=(i*83+Math.sin(ht*2+i)*20)%w;
+  const y=(h-(ht*30+i*48)%h);
 
-    hx.globalAlpha =
-      .15;
+  hx.fillStyle='#bafff5';
+  hx.beginPath();
+  hx.arc(x,y,1+i%4,0,Math.PI*2);
+  hx.fill();
+ }
 
-    hx.lineWidth = 3;
-
-    hx.beginPath();
-
-    for(
-      let x=0;
-      x<w;
-      x+=10
-    ){
-
-      const y =
-        h*(.18+layer*.18)
-        +
-        Math.sin(
-          x*.018+
-          ht*(1+layer*.2)
-        )*22
-        +
-        Math.sin(
-          x*.05+layer
-        )*10;
-
-      hx.lineTo(x,y);
-
-    }
-
-    hx.stroke();
-
-  }
-
-  hx.globalAlpha = 1;
-
-  /* peces */
-
-  heroFish.forEach((fish,i)=>{
-
-    let x =
-      ((fish.x*w)
-      +
-      (ht*100*fish.speed))
-      %
-      (w+100);
-
-    if(x<0)x+=w;
-
-    const y =
-      fish.y*h+
-      Math.sin(ht*4+i)*12;
-
-    drawFish(
-      x,
-      y,
-      fish.s,
-      fish.c
-    );
-
-  });
-
-  /* partículas */
-
-  for(let i=0;i<18;i++){
-
-    const x =
-      (i*73+ht*15)%w;
-
-    const y =
-      (h-(i*37+ht*25)%h);
-
-    hx.fillStyle =
-      "rgba(186,255,245,.45)";
-
-    hx.beginPath();
-
-    hx.arc(
-      x,
-      y,
-      1+i%3,
-      0,
-      Math.PI*2
-    );
-
-    hx.fill();
-
-  }
-
-  requestAnimationFrame(hero);
-
+ hx.globalAlpha=1;
+ requestAnimationFrame(hero);
 }
 
 heroResize();
+window.addEventListener('resize',heroResize);
+hero();
 
-window.addEventListener(
-  "resize",
-  heroResize
-);
-
-window.addEventListener(
-  "resize",
-  resizeArt
-);
-
-/* =========================================================
+/* =====================================================
    JUEGO
-========================================================= */
+===================================================== */
+const gc=$('#game');
+const g=gc.getContext('2d');
 
-const gc =
-  $("#game");
-
-const g =
-  gc.getContext("2d");
-
-let GW = 900;
-let GH = 600;
+let GW=900;
+let GH=590;
 
 function resizeGame(){
+ const r=gc.getBoundingClientRect();
+ const d=devicePixelRatio||1;
 
-  const r =
-    gc.getBoundingClientRect();
+ gc.width=r.width*d;
+ gc.height=r.height*d;
 
-  const d =
-    window.devicePixelRatio || 1;
-
-  gc.width =
-    r.width*d;
-
-  gc.height =
-    r.height*d;
-
-  GW =
-    r.width;
-
-  GH =
-    r.height;
-
+ GW=r.width;
+ GH=r.height;
 }
 
+window.addEventListener('resize',resizeGame);
 resizeGame();
 
-window.addEventListener(
-  "resize",
-  resizeGame
-);
-
-let keys = {};
+let keys={};
 let player;
-let items;
-let gameT;
-let last = 0;
+let items=[];
+let gameT=0;
+let last=0;
+let score=0;
+let eco=0;
+let poll=20;
+let currentZone=0;
 
-let score = 0;
-let eco = 0;
-let poll = 20;
-
-let missionTarget = 3;
+const zones=[
+ {
+  name:'Arrecife',
+  color:'#07526c',
+  coral:'#ff8fa3'
+ },
+ {
+  name:'Manglar',
+  color:'#075448',
+  coral:'#65d49b'
+ },
+ {
+  name:'Mar abierto',
+  color:'#075b78',
+  coral:'#6bb8ff'
+ },
+ {
+  name:'Océano profundo',
+  color:'#16285e',
+  coral:'#9e8cff'
+ },
+ {
+  name:'El Abismo',
+  color:'#160d39',
+  coral:'#cf86ff'
+ }
+];
 
 function rand(a,b){
-  return Math.random()*(b-a)+a;
+ return Math.random()*(b-a)+a;
 }
 
 function resetGame(){
+ score=0;
+ eco=0;
+ poll=20;
+ gameT=0;
+ currentZone=0;
 
-  score = 0;
-  eco = 0;
-  poll = 20;
-  gameT = 0;
+ player={
+  x:GW*.25,
+  y:GH*.5,
+  vx:0,
+  vy:0
+ };
 
-  player = {
-    x:GW*.25,
-    y:GH*.5,
-    vx:0,
-    vy:0
-  };
+ items=[];
 
-  items = [];
+ for(let i=0;i<25;i++){
+  items.push({
+   x:rand(40,GW+600),
+   y:rand(100,GH-40),
+   type:
+    Math.random()<.27
+     ? 'trash'
+     : Math.random()<.55
+       ? 'eco'
+       : 'pearl',
+   r:Math.random()*7+7,
+   phase:Math.random()*6
+  });
+ }
 
-  for(let i=0;i<25;i++){
-
-    items.push({
-      x:rand(30,GW+600),
-      y:rand(90,GH-40),
-      type:
-        Math.random()<.30
-          ? "trash"
-          : Math.random()<.55
-            ? "eco"
-            : "pearl",
-      r:Math.random()*7+7,
-      phase:Math.random()*6
-    });
-
-  }
-
-  updateMission();
-
-  toast(
-    "Expedición reiniciada. Cuida el arrecife. 🪸"
-  );
-
+ $('#zone').textContent=zones[0].name;
+ toast('Expedición reiniciada. Cuida el arrecife 🌊');
 }
 
 resetGame();
 
-/* teclado */
+addEventListener('keydown',e=>{
+ keys[e.key.toLowerCase()]=true;
+});
 
-addEventListener(
-  "keydown",
-  e=>{
-    keys[e.key.toLowerCase()] = true;
-  }
-);
+addEventListener('keyup',e=>{
+ keys[e.key.toLowerCase()]=false;
+});
 
-addEventListener(
-  "keyup",
-  e=>{
-    keys[e.key.toLowerCase()] = false;
-  }
-);
+gc.addEventListener('pointermove',e=>{
+ if(e.buttons){
+  const r=gc.getBoundingClientRect();
 
-/* controles táctiles */
+  player.x=(e.clientX-r.left)/r.width*GW;
+  player.y=(e.clientY-r.top)/r.height*GH;
+ }
+});
 
-let touchActive = false;
+$('#char').onchange=e=>{
+ $('#avatar').textContent=e.target.value;
+};
 
-gc.addEventListener(
-  "pointerdown",
-  e=>{
+function drawCoral(x,y,scale,seed){
+ const angle=Math.sin(seed)*.5;
 
-    touchActive = true;
+ g.save();
+ g.translate(x,y);
+ g.rotate(angle);
 
-    gc.setPointerCapture(
-      e.pointerId
-    );
+ g.strokeStyle=zones[currentZone].coral;
+ g.globalAlpha=.55;
+ g.lineWidth=2;
 
-    movePlayerToPointer(e);
+ for(let i=0;i<6;i++){
+  g.beginPath();
+  g.moveTo(0,0);
+  g.lineTo(
+   Math.sin(seed+i)*18*scale,
+   -32*scale
+  );
+  g.stroke();
 
-  }
-);
+  g.translate(
+   Math.sin(seed+i)*3,
+   -32*scale
+  );
+ }
 
-gc.addEventListener(
-  "pointermove",
-  e=>{
-
-    if(!touchActive) return;
-
-    movePlayerToPointer(e);
-
-  }
-);
-
-gc.addEventListener(
-  "pointerup",
-  ()=>{
-    touchActive = false;
-  }
-);
-
-gc.addEventListener(
-  "pointercancel",
-  ()=>{
-    touchActive = false;
-  }
-);
-
-function movePlayerToPointer(e){
-
-  const r =
-    gc.getBoundingClientRect();
-
-  const targetX =
-    (e.clientX-r.left) /
-    r.width *
-    GW;
-
-  const targetY =
-    (e.clientY-r.top) /
-    r.height *
-    GH;
-
-  player.x +=
-    (targetX-player.x)*.25;
-
-  player.y +=
-    (targetY-player.y)*.25;
-
+ g.restore();
 }
-
-/* personaje */
-
-$("#char").onchange =
-  e=>{
-    $("#avatar").textContent =
-      e.target.value;
-  };
-
-/* coral */
-
-function lsystemCoral(
-  x,
-  y,
-  scale,
-  seed
-){
-
-  const angle =
-    Math.sin(seed)*.5;
-
-  const steps = 6;
-
-  g.save();
-
-  g.translate(x,y);
-
-  g.rotate(angle);
-
-  g.strokeStyle =
-    poll>65
-      ? "#706b64"
-      : "#ff8d9c";
-
-  g.globalAlpha =
-    poll>65
-      ? .35
-      : .68;
-
-  g.lineWidth = 2;
-
-  for(
-    let i=0;
-    i<steps;
-    i++
-  ){
-
-    g.beginPath();
-
-    g.moveTo(0,0);
-
-    g.lineTo(
-      Math.sin(seed+i)*18*scale,
-      -32*scale
-    );
-
-    g.stroke();
-
-    g.translate(
-      Math.sin(seed+i)*3,
-      -32*scale
-    );
-
-  }
-
-  g.restore();
-
-}
-
-/* misión */
-
-function updateMission(){
-
-  const box =
-    $("#missionBox");
-
-  const text =
-    $("#missionText");
-
-  if(eco>=missionTarget){
-
-    box.classList.add("complete");
-
-    text.textContent =
-      "¡Misión completada! 🪸";
-
-    unlock(
-      "achievementEco"
-    );
-
-  }else{
-
-    box.classList.remove("complete");
-
-    text.textContent =
-      `Recolecta ${missionTarget-eco} elemento(s) ♻️`;
-
-  }
-
-}
-
-/* ciclo del juego */
 
 function game(dt){
-
-  gameT += dt;
-
-  const d =
-    window.devicePixelRatio || 1;
-
-  g.setTransform(
-    d,0,0,d,0,0
-  );
-
-  g.clearRect(
-    0,
-    0,
-    GW,
-    GH
-  );
-
-  /* agua */
-
-  const water =
-    poll>70
-      ? "#263f46"
-      : poll>45
-        ? "#075d70"
-        : "#063b61";
-
-  g.fillStyle =
-    water;
-
-  g.fillRect(
-    0,
-    0,
-    GW,
-    GH
-  );
-
-  /* profundidad */
-
-  for(let layer=0;layer<4;layer++){
-
-    g.globalAlpha = .23;
-
-    g.fillStyle =
-      layer%2
-        ? "#082f52"
-        : "#0a6d75";
-
-    g.beginPath();
-
-    g.moveTo(
-      0,
-      GH
-    );
-
-    for(
-      let x=0;
-      x<GW;
-      x+=15
-    ){
-
-      g.lineTo(
-        x,
-        GH-70-layer*35+
-        Math.sin(
-          x*.025+
-          gameT*(.5+layer*.2)
-        )*18
-      );
-
-    }
-
-    g.lineTo(
-      GW,
-      GH
-    );
-
-    g.fill();
-
-  }
-
-  g.globalAlpha = 1;
-
-  /* partículas */
-
-  for(let i=0;i<18;i++){
-
-    const x =
-      (i*90-gameT*12) %
-      (GW+100);
-
-    const y =
-      60+(i*43)%GH;
-
-    g.fillStyle =
-      "rgba(80,240,220,.16)";
-
-    g.beginPath();
-
-    g.arc(
-      x,
-      y,
-      2+i%4,
-      0,
-      Math.PI*2
-    );
-
-    g.fill();
-
-  }
-
-  /* coral */
-
-  for(let i=0;i<10;i++){
-
-    lsystemCoral(
-      40+i*105,
-      GH-20,
-      .5+(i%3)*.12,
-      i
-    );
-
-  }
-
-  /* objetos */
-
-  items.forEach(o=>{
-
-    o.x -=
-      dt*(20+poll*.25);
-
-    if(o.x<-40){
-
-      o.x =
-        GW+rand(50,350);
-
-    }
-
-    const y =
-      o.y+
-      Math.sin(
-        gameT*2+o.phase
-      )*8;
-
-    g.font =
-      (o.r*2)+"px serif";
-
-    g.fillText(
-      o.type==="trash"
-        ? "☣"
-        : o.type==="eco"
-          ? "♻️"
-          : "✦",
-      o.x,
-      y
-    );
-
-  });
-
-  /* movimiento */
-
-  const dx =
-    (
-      keys["arrowright"] ||
-      keys["d"]
-      ? 1
-      : 0
-    )
-    -
-    (
-      keys["arrowleft"] ||
-      keys["a"]
-      ? 1
-      : 0
-    );
-
-  const dy =
-    (
-      keys["arrowdown"] ||
-      keys["s"]
-      ? 1
-      : 0
-    )
-    -
-    (
-      keys["arrowup"] ||
-      keys["w"]
-      ? 1
-      : 0
-    );
-
-  player.vx +=
-    (dx*180-player.vx)*
-    dt*4;
-
-  player.vy +=
-    (dy*180-player.vy)*
-    dt*4;
-
-  player.x =
-    Math.max(
-      25,
-      Math.min(
-        GW-25,
-        player.x+
-        player.vx*dt
-      )
-    );
-
-  player.y =
-    Math.max(
-      85,
-      Math.min(
-        GH-30,
-        player.y+
-        player.vy*dt
-      )
-    );
-
-  /* colisiones */
-
-  items.forEach(o=>{
-
-    const y =
-      o.y+
-      Math.sin(
-        gameT*2+o.phase
-      )*8;
-
-    if(
-      Math.hypot(
-        o.x-player.x,
-        y-player.y
-      ) < 30
-    ){
-
-      if(o.type==="trash"){
-
-        poll =
-          Math.min(
-            100,
-            poll+8
-          );
-
-        score =
-          Math.max(
-            0,
-            score-5
-          );
-
-        toast(
-          "Residuo detectado. La contaminación sube ☣"
-        );
-
-      }
-
-      else if(o.type==="eco"){
-
-        poll =
-          Math.max(
-            0,
-            poll-10
-          );
-
-        eco++;
-
-        score += 15;
-
-        toast(
-          "¡Restauración! El agua recupera color 🪸"
-        );
-
-        updateMission();
-
-        if(poll<10){
-
-          unlock(
-            "achievementClean"
-          );
-
-        }
-
-      }
-
-      else{
-
-        score += 10;
-
-      }
-
-      o.x =
-        GW+
-        rand(100,400);
-
-    }
-
-  });
-
-  /* personaje */
-
-  const suit =
-    $("#outfit").value;
-
-  const emoji =
-    $("#char").value;
-
-  g.fillStyle =
-    suit==="coral"
-      ? "#ff7f96"
-      : suit==="violet"
-        ? "#9a7dff"
-        : "#65eee0";
+ gameT+=dt;
+
+ const d=devicePixelRatio||1;
+
+ g.setTransform(d,0,0,d,0,0);
+ g.clearRect(0,0,GW,GH);
+
+ /*
+   CAMBIO DE ZONA SEGÚN PROGRESO
+ */
+ currentZone=Math.min(
+  zones.length-1,
+  Math.floor(score/70)
+ );
+
+ $('#zone').textContent=zones[currentZone].name;
+
+ if(currentZone>=4){
+  unlock('abismo');
+ }
+
+ const z=zones[currentZone];
+
+ /*
+   AGUA
+ */
+ g.fillStyle=z.color;
+ g.fillRect(0,0,GW,GH);
+
+ /*
+   CAPAS DE PROFUNDIDAD
+ */
+ g.globalAlpha=.22;
+
+ for(let layer=0;layer<5;layer++){
+  g.fillStyle=
+   layer%2
+    ? '#082f52'
+    : '#0a6d75';
 
   g.beginPath();
+  g.moveTo(0,GH);
 
-  g.arc(
-    player.x,
-    player.y,
-    22+
-    Math.sin(gameT*6)*2,
-    0,
-    Math.PI*2
-  );
+  for(let x=0;x<GW;x+=15){
+   g.lineTo(
+    x,
+    GH-
+    70-
+    layer*34+
+    Math.sin(
+     x*.025+
+     gameT*(.5+layer*.2)
+    )*18
+   );
+  }
 
+  g.lineTo(GW,GH);
   g.fill();
+ }
 
-  g.font =
-    "28px serif";
+ g.globalAlpha=1;
+
+ /*
+   PARTÍCULAS
+ */
+ for(let i=0;i<18;i++){
+  let x=(i*90-gameT*12)%(GW+100);
+
+  if(x<0)x+=GW+100;
+
+  g.fillStyle='rgba(80,240,220,.18)';
+  g.beginPath();
+  g.arc(
+   x,
+   70+(i*43)%GH,
+   2+i%4,
+   0,
+   Math.PI*2
+  );
+  g.fill();
+ }
+
+ /*
+   CORALES
+ */
+ for(let i=0;i<10;i++){
+  drawCoral(
+   30+i*105,
+   GH-18,
+   .5+(i%3)*.12,
+   i
+  );
+ }
+
+ /*
+   ITEMS
+ */
+ items.forEach(o=>{
+  o.x-=dt*(20+poll*.25);
+
+  if(o.x<-40){
+   o.x=GW+rand(50,350);
+  }
+
+  const y=o.y+Math.sin(gameT*2+o.phase)*8;
+
+  g.font=(o.r*2)+'px serif';
 
   g.fillText(
-    emoji,
-    player.x-15,
-    player.y+10
+   o.type==='trash'
+    ? '☣'
+    : o.type==='eco'
+      ? '♻️'
+      : '✦',
+   o.x,
+   y
   );
+ });
 
-  /* contaminación */
+ /*
+   MOVIMIENTO
+ */
+ let dx=
+  (keys['arrowright']||keys['d']?1:0)-
+  (keys['arrowleft']||keys['a']?1:0);
 
-  if(poll>55){
+ let dy=
+  (keys['arrowdown']||keys['s']?1:0)-
+  (keys['arrowup']||keys['w']?1:0);
 
-    g.fillStyle =
-      `rgba(120,110,80,${(poll-45)/180})`;
+ player.vx+=(dx*180-player.vx)*dt*4;
+ player.vy+=(dy*180-player.vy)*dt*4;
 
-    g.fillRect(
-      0,
-      0,
-      GW,
-      GH
-    );
+ player.x=Math.max(
+  25,
+  Math.min(GW-25,player.x+player.vx*dt)
+ );
 
+ player.y=Math.max(
+  85,
+  Math.min(GH-30,player.y+player.vy*dt)
+ );
+
+ /*
+   COLISIONES
+ */
+ items.forEach(o=>{
+  const y=o.y+Math.sin(gameT*2+o.phase)*8;
+
+  if(
+   Math.hypot(
+    o.x-player.x,
+    y-player.y
+   )<28
+  ){
+
+   if(o.type==='trash'){
+
+    poll=Math.min(100,poll+8);
+    score=Math.max(0,score-5);
+
+    toast('Residuo detectado. La presión aumenta ☣');
+
+   }else if(o.type==='eco'){
+
+    poll=Math.max(0,poll-10);
+    eco++;
+    score+=15;
+
+    health.poll=Math.min(100,health.poll+4);
+    health.eco=Math.min(100,health.eco+2);
+    updateHealth();
+
+    unlock('restaurador');
+
+    if(eco>=5)unlock('reciclador');
+
+    toast('¡Restauración! El agua recupera color 🪸');
+
+   }else{
+
+    score+=10;
+
+    if(score>=100)unlock('puntaje');
+   }
+
+   o.x=GW+rand(100,400);
   }
+ });
 
-  /* estado */
+ /*
+   PERSONAJE
+ */
+ const suit=$('#outfit').value;
+ const emoji=$('#char').value;
 
-  $("#score").textContent =
-    score;
+ g.fillStyle=
+  suit==='coral'
+   ? '#ff7f96'
+   : suit==='violet'
+     ? '#9a7dff'
+     : '#65eee0';
 
-  $("#eco").textContent =
-    eco;
+ g.beginPath();
+ g.arc(
+  player.x,
+  player.y,
+  22+Math.sin(gameT*6)*2,
+  0,
+  Math.PI*2
+ );
+ g.fill();
 
-  $("#poll").textContent =
-    Math.round(poll);
+ g.font='28px serif';
+ g.fillText(
+  emoji,
+  player.x-15,
+  player.y+10
+ );
 
-  $("#time").textContent =
-    Math.floor(gameT);
+ /*
+   CONTAMINACIÓN
+ */
+ if(poll>55){
+  g.fillStyle=
+   `rgba(120,110,80,${(poll-45)/180})`;
 
-  requestAnimationFrame(
-    t=>{
+  g.fillRect(0,0,GW,GH);
+ }
 
-      const dt =
-        Math.min(
-          .04,
-          (t-last)/1000 || .016
-        );
+ /*
+   HUD
+ */
+ $('#score').textContent=score;
+ $('#eco').textContent=eco;
+ $('#poll').textContent=Math.round(poll);
+ $('#time').textContent=Math.floor(gameT);
 
-      last=t;
-
-      game(dt);
-
-    }
+ requestAnimationFrame(t=>{
+  const dt=Math.min(
+   .04,
+   (t-last)/1000||.016
   );
 
+  last=t;
+  game(dt);
+ });
 }
 
-requestAnimationFrame(
-  t=>{
-    last=t;
-    game(.016);
-  }
-);
+requestAnimationFrame(t=>{
+ last=t;
+ game(.016);
+});
 
-/* =========================================================
-   INICIALIZACIÓN
-========================================================= */
+/* =====================================================
+   ATAJOS DE NAVEGACIÓN
+===================================================== */
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape')closeModal();
 
-window.addEventListener(
-  "load",
-  ()=>{
-
-    resizeArt();
-    resizeGame();
-
-    if(saved.achievementLearn){
-      unlock("achievementLearn");
-    }
-
-    toast(
-      "Bienvenida a ABISMO 14 🌊"
-    );
-
-  }
-);
-
+ if(e.key.toLowerCase()==='i'){
+  toggleImmersive();
+ }
+});
 </script>
-
 </body>
 </html>
